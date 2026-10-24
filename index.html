@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -695,7 +694,7 @@
         <!-- Avatar -->
         <div class="avatar-container">
             <div class="avatar-wrapper" id="avatarWrapper">
-                <img src="https://cdn.discordapp.com/attachments/1561699693107486745/1562189753460334692/aa4fe4bfef3d90caff36283ab86f635e.webp?ex=6ad91615&is=6ad7c495&hm=815466f62186f5a28296e41d500efc34d058854396a5a6aa7eccecdacffb9ed9&" alt="Avatar Khuong Duy">
+                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563637421743276032/aa4fe4bfef3d90caff36283ab86f635e.webp?ex=6ade5a54&is=6add08d4&hm=7a148123609c701ff6608772fc5ea0a68d106fb07a3ed6b3f28cdebbd4bdcaf4&" alt="Avatar Khuong Duy">
             </div>
         </div>
 
@@ -939,7 +938,7 @@
             }
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
-            playSwoosh(); // Phát âm thanh khi chuyển tab
+            playSwoosh();
         }
 
         // --- Hiệu ứng Avatar 3D Tilt ---
@@ -1062,13 +1061,11 @@
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Vẽ sao băng
             shootingStars.forEach(star => {
                 star.update();
                 star.draw();
             });
 
-            // Vẽ hạt kết nối
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
                 particlesArray[i].draw();
@@ -1124,7 +1121,7 @@
                 ripple.style.top = `${y}px`;
                 
                 this.appendChild(ripple);
-                playPop(); // Phát âm thanh pop
+                playPop();
                 
                 setTimeout(() => {
                     ripple.remove();
@@ -1149,7 +1146,6 @@
         reportBtn.addEventListener('click', () => {
             reportBtn.classList.add('shake');
             playPop();
-            // Mở link báo lỗi
             window.open('https://discord.gg/t7NCDaRW', '_blank');
             setTimeout(() => {
                 reportBtn.classList.remove('shake');
@@ -1196,4 +1192,3 @@
 
 </body>
 </html>
-```
