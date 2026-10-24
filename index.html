@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -281,9 +282,10 @@
         }
 
         /* Nội dung Tabs & Hiệu ứng chuyển tab */
-        .tab-content {
+        uppercase .tab-content {
             display: none;
-            flex-direction: column;
+           ;
+ flex-direction: column;
             gap: 12px;
             animation: fadeInSlide 0.4s ease-out forwards;
         }
@@ -323,8 +325,7 @@
             font-weight: bold;
             color: var(--text-color);
             margin-bottom: 15px;
-            text-transform: uppercase;
-        }
+            text-transform:        }
 
         /* Nút Vượt Link To */
         .btn-big-link {
@@ -455,7 +456,8 @@
             <!-- Phần 1 -->
             <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="iOS Image" class="tab-main-image" onerror="this.src='https://via.placeholder.com/400x200?text=Anh+Loi'">
             <div class="image-desc">ASTUTECH OB55 ANTIBAN IOS</div>
-            <a href="#" class="btn-big-link" onclick="startDownload(this, 'https://link-vuot-day.com', 'ASTUTECH OB55 ANTIBAN IOS')">
+            <!-- Nút chuyển hướng trực tiếp không qua modal -->
+            <a href="https://link2m.com/edvIxeV" target="_blank" class="btn-big-link">
                 Vượt Link Ngay (3 Link)
             </a>
 
@@ -465,12 +467,13 @@
             <!-- Phần 2 -->
             <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="iOS Image 2" class="tab-main-image" onerror="this.src='https://via.placeholder.com/400x200?text=Anh+Loi'">
             <div class="image-desc">KIPAS OB55 ANTIBAN IOS</div>
-            <a href="#" class="btn-big-link" onclick="startDownload(this, 'https://link-vuot-day.com', 'KIPAS OB55 ANTIBAN IOS')">
+            <!-- Nút chuyển hướng trực tiếp không qua modal -->
+            <a href="https://link2m.com/edvIxeV" target="_blank" class="btn-big-link">
                 Vượt Link Ngay (3 Link)
             </a>
             
-            <!-- Phần Lưu ý -->
-            <div class="warning-box">
+            <!-- Phần L -->
+           ưu ý <div class="warning-box">
                 <h4>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
                     LƯU Ý QUAN TRỌNG KHI MOD
@@ -489,18 +492,6 @@
             
         </div>
 
-    </div>
-
-    <!-- Modal Tải Xuống -->
-    <div class="modal-overlay" id="downloadModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; justify-content: center; align-items: center; z-index: 1000; backdrop-filter: blur(5px);">
-        <div class="modal-content" style="background: var(--modal-bg); padding: 30px; border-radius: 20px; width: 80%; max-width: 320px; text-align: center; border: 1px solid var(--item-border);">
-            <h3 id="modalTitle" style="margin-bottom: 20px; font-size: 1.2rem; color: var(--text-color);">Đang chuẩn bị...</h3>
-            <div class="progress-bar-container" style="width: 100%; height: 10px; background: var(--item-bg); border-radius: 5px; overflow: hidden; margin-bottom: 15px;">
-                <div class="progress-bar-fill" id="progressFill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #00d2ff, #cb43ce); border-radius: 5px; transition: width 0.1s linear;"></div>
-            </div>
-            <div class="modal-text" id="modalText" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Vui lòng chờ...</div>
-            <button class="modal-btn" id="modalCloseBtn" onclick="closeModal()" style="background: #3b82f6; color: #fff; border: none; padding: 10px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; display: none;">Đóng</button>
-        </div>
     </div>
 
     <!-- Script điều khiển -->
@@ -564,60 +555,8 @@
             evt.currentTarget.classList.add("active");
         }
 
-        // --- Thanh Tiến Trình Tải & Đếm Ngược ---
-        const downloadModal = document.getElementById('downloadModal');
-        const progressFill = document.getElementById('progressFill');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalText = document.getElementById('modalText');
-        const modalCloseBtn = document.getElementById('modalCloseBtn');
-        let downloadInterval;
-
-        function startDownload(element, url, title) {
-            // Mở modal
-            downloadModal.style.display = 'flex';
-            modalTitle.textContent = title;
-            modalText.textContent = 'Đang tạo tiến trình tải...';
-            progressFill.style.width = '0%';
-            modalCloseBtn.style.display = 'none';
-            
-            let progress = 0;
-            
-            clearInterval(downloadInterval);
-            
-            downloadInterval = setInterval(() => {
-                progress += Math.random() * 5 + 2;
-                if (progress > 100) progress = 100;
-                progressFill.style.width = progress + '%';
-
-                if (progress >= 100) {
-                    clearInterval(downloadInterval);
-                    startCountdown(url);
-                }
-            }, 50);
-        }
-
-        function startCountdown(url) {
-            let countdown = 3;
-            modalText.textContent = `Đang chuyển hướng sau ${countdown} giây...`;
-            
-            let countdownInterval = setInterval(() => {
-                countdown--;
-                if (countdown > 0) {
-                    modalText.textContent = `Đang chuyển hướng sau ${countdown} giây...`;
-                } else {
-                    clearInterval(countdownInterval);
-                    modalText.textContent = 'Đã sẵn sàng!';
-                    modalCloseBtn.style.display = 'inline-block';
-                    window.open(url, '_blank');
-                }
-            }, 1000);
-        }
-
-        function closeModal() {
-            downloadModal.style.display = 'none';
-        }
-
     </script>
 
 </body>
 </html>
+```
