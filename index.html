@@ -17,6 +17,7 @@
             --item-border: rgba(255, 255, 255, 0.08);
             --icon-btn-bg: rgba(255, 255, 255, 0.1);
             --modal-bg: rgba(30, 30, 40, 0.95);
+            --accent-color: #3b82f6;
         }
 
         /* Ghi đè biến màu cho chế độ sáng */
@@ -30,6 +31,7 @@
             --item-border: rgba(0, 0, 0, 0.08);
             --icon-btn-bg: rgba(0, 0, 0, 0.05);
             --modal-bg: rgba(255, 255, 255, 0.95);
+            --accent-color: #1d4ed8;
         }
 
         /* Reset CSS cơ bản */
@@ -41,15 +43,32 @@
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
-        /* Nền gradient toàn trang */
+        /* Nền gradient động toàn trang */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         body {
-            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background: linear-gradient(-45deg, var(--bg-gradient-start), var(--bg-gradient-end), #2a1b3d, #1a1a2e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: var(--text-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-bottom: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Canvas hạt bụi */
+        #particle-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Thanh Header */
@@ -65,14 +84,22 @@
             top: 0;
             z-index: 100;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--item-border);
         }
 
         .header-title {
             font-size: 1.2rem;
             font-weight: bold;
-            background: linear-gradient(90deg, #00d2ff, #cb43ce);
+            background: linear-gradient(90deg, #00d2ff, #cb43ce, #00d2ff);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradientText 3s linear infinite;
+        }
+        
+        @keyframes gradientText {
+            to { background-position: 200% center; }
         }
 
         .header-actions {
@@ -93,6 +120,8 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .icon-btn svg {
@@ -106,6 +135,7 @@
             width: 100%;
             max-width: 450px;
             padding: 0 10px;
+            position: relative;
         }
 
         /* Phần Avatar */
@@ -114,6 +144,7 @@
             justify-content: center;
             margin-top: 30px;
             margin-bottom: 20px;
+            position: relative;
         }
 
         /* Hiệu ứng viền nháy màu */
@@ -130,6 +161,7 @@
             100% { transform: scale(1); }
         }
 
+        /* Hiệu ứng 3D Tilt */
         .avatar-wrapper {
             width: 140px;
             height: 140px;
@@ -140,6 +172,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
         }
 
         .avatar-wrapper img {
@@ -149,6 +183,29 @@
             object-fit: cover;
             background-color: #111;
             border: 2px solid var(--bg-gradient-start);
+            pointer-events: none;
+        }
+
+        /* Hiệu ứng sóng âm (Aura) cho Avatar */
+        .avatar-wrapper::before,
+        .avatar-wrapper::after {
+            content: '';
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 210, 255, 0.3);
+            animation: auraWave 3s linear infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .avatar-wrapper::after {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes auraWave {
+            0% { transform: scale(0.9); opacity: 1; }
+            100% { transform: scale(1.3); opacity: 0; }
         }
 
         /* Thông tin cá nhân */
@@ -171,7 +228,18 @@
         .name {
             font-size: 1.8rem;
             font-weight: bold;
-            color: var(--text-color);
+            background: linear-gradient(90deg, #fff, #a0a0b0, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 4s linear infinite;
+        }
+        
+        body.light-mode .name {
+             background: linear-gradient(90deg, #1c1e21, #65676b, #1c1e21);
+             background-size: 200% auto;
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
         }
 
         /* Icon tích xanh */
@@ -192,11 +260,13 @@
             justify-content: center;
             align-items: center;
             
-            background: linear-gradient(90deg, #63CCE0, #CB43CE);
+            background: linear-gradient(90deg, #63CCE0, #CB43CE, #63CCE0);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             color: transparent;
+            animation: gradientText 3s linear infinite;
             margin-bottom: 20px;
         }
 
@@ -254,15 +324,23 @@
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.2s;
+            position: relative;
         }
 
         .tab-btn.active {
-            background: #3b82f6;
+            background: var(--accent-color);
             color: #fff;
-            border-color: #3b82f6;
+            border-color: var(--accent-color);
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+            animation: tabBounce 0.4s ease;
         }
         
+        @keyframes tabBounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
         .tab-btn.active svg {
             fill: #fff;
         }
@@ -286,16 +364,16 @@
             display: none;
             flex-direction: column;
             gap: 12px;
-            animation: fadeInSlide 0.4s ease-out forwards;
+            animation: slideIn 0.4s ease-out forwards;
         }
 
         .tab-content.active {
             display: flex;
         }
 
-        @keyframes fadeInSlide {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         /* Đường kẻ ngăn cách */
@@ -306,15 +384,41 @@
             width: 100%;
         }
 
-        /* Ảnh to trong Tab */
+        /* Skeleton Loading cho ảnh */
+        .img-container {
+            width: 100%;
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: var(--item-bg);
+            min-height: 200px;
+        }
+
+        /* Hiệu ứng tải */
+        .img-container::before {
+            content: "";
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            100% { left: 100%; }
+        }
+
         .tab-main-image {
             width: 100%;
             height: auto;
-            border-radius: 16px;
-            object-fit: cover;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: block;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tab-main-image.loaded {
+            opacity: 1;
         }
 
         /* Mô tả ảnh */
@@ -331,7 +435,8 @@
         .btn-big-link {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
+            background-size: 200% auto;
             color: #fff;
             border: none;
             border-radius: 12px;
@@ -345,20 +450,43 @@
             align-items: center;
             gap: 10px;
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background-position 0.3s;
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-big-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+            background-position: right center;
+            animation: borderGlow 2s infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            from { box-shadow: 0 0 10px #3b82f6, 0 0 20px #8b5cf6; }
+            to { box-shadow: 0 0 20px #8b5cf6, 0 0 30px #3b82f6; }
         }
 
         .btn-big-link:active {
             transform: scale(0.98);
         }
 
-        /* Phần Lưu ý */
+        /* Hiệu ứng Ripple (Sóng nước) */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-anim {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* Phần Lưu ý & Hướng dẫn */
         .warning-box {
             background: rgba(255, 153, 0, 0.1);
             border: 1px solid rgba(255, 153, 0, 0.3);
@@ -387,9 +515,165 @@
             margin-bottom: 5px;
         }
 
+        /* Phần Hướng dẫn cài */
+        .guide-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .guide-box h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .btn-guide {
+            display: inline-block;
+            padding: 12px 20px;
+            background: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-guide:hover {
+            background: #2563eb;
+        }
+
+        /* Nút Lên Đầu Trang */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+
+        .scroll-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Thanh Tiến Trình Đọc */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 101;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d2ff, #cb43ce);
+            width: 0%;
+        }
+
+        /* Toast Message */
+        .toast {
+            position: fixed;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: bottom 0.3s ease, opacity 0.3s;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        /* Popup Report */
+        .report-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #ef4444;
+            color: #fff;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 99;
+        }
+
+        .report-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .report-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Hiệu ứng Shake cho nút báo lỗi */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        .shake {
+            animation: shake 0.4s ease-in-out;
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- Thanh Tiến Trình Đọc -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Canvas hạt bụi -->
+    <canvas id="particle-canvas"></canvas>
 
     <!-- Thanh Header -->
     <div class="header">
@@ -454,10 +738,11 @@
         <!-- 1. iOS Tab -->
         <div id="ios" class="tab-content active">
             <!-- Phần 1 -->
-            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="ASTUTECH OB55 ANTIBAN IOS" class="tab-main-image" onerror="this.src='https://via.placeholder.com/400x200?text=Anh+Loi'">
+            <div class="img-container">
+                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="ASTUTECH OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+            </div>
             <div class="image-desc">ASTUTECH OB55 ANTIBAN IOS</div>
-            <!-- Link đã cập nhật cho Astutech -->
-            <a href="https://link2m.com/1UtTyc4r" target="_blank" class="btn-big-link">
+            <a href="https://link2m.com/1UtTyc4r" target="_blank" class="btn-big-link ripple-btn">
                 Vượt Link Ngay (3 Link)
             </a>
 
@@ -465,13 +750,28 @@
             <div class="divider"></div>
 
             <!-- Phần 2 -->
-            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="KIPAS OB55 ANTIBAN IOS" class="tab-main-image" onerror="this.src='https://via.placeholder.com/400x200?text=Anh+Loi'">
+            <div class="img-container">
+                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="KIPAS OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+            </div>
             <div class="image-desc">KIPAS OB55 ANTIBAN IOS</div>
-            <!-- Link giữ nguyên cho Kipas -->
-            <a href="https://link2m.com/edvIxeV" target="_blank" class="btn-big-link">
+            <a href="https://link2m.com/edvIxeV" target="_blank" class="btn-big-link ripple-btn">
                 Vượt Link Ngay (3 Link)
             </a>
+
+            <!-- Đường kẻ ngăn cách -->
+            <div class="divider"></div>
             
+            <!-- Phần Hướng dẫn cài -->
+            <div class="guide-box">
+                <h4>HƯỚNG DẪN CÀI ĐẶT</h4>
+                <a href="https://drive.google.com/file/d/1c64yC1dTXEBbCv_pmpCf5RTaJAVK-918/view" target="_blank" class="btn-guide ripple-btn">
+                    Bấm Vào Đây
+                </a>
+            </div>
+
+            <!-- Đường kẻ ngăn cách -->
+            <div class="divider"></div>
+
             <!-- Phần Lưu ý -->
             <div class="warning-box">
                 <h4>
@@ -479,20 +779,106 @@
                     LƯU Ý QUAN TRỌNG KHI MOD
                 </h4>
                 <ul>
-                    <li>Khuyến cáo nên test trên <b>tài khoản clone (tài khoản phụ)</b> trước khoảng 1 - 2 ngày.</li>
-                    <li>Nếu tài khoản bị ban (khóa), <b>Admin sẽ không chịu trách nhiệm</b>.</li>
+                    <li>Khuyến cáo nên test trên <b>tài khoản clone (tài khoản phụ)</b> trước khoảng 1 - 2 ngày. Nếu tài khoản bị ban (khóa), <b>Admin sẽ không chịu trách nhiệm</b>.</li>
                     <li>Không nên sử dụng các bản mod có tỷ lệ ban cao trên tài khoản chính có nhiều skin/tâm huyết.</li>
-                    <li>Hạn chế khoe khoang, livestream lộ liễu khi đang sử dụng mod để tránh bị báo cáo (report).</li>
+                    <li>Tuyệt đối không khoe khoang, livestream lộ liễu hoặc ghi hình có dấu hiệu bất thường để tránh bị người chơi khác báo cáo (report).</li>
+                    <li>Không sử dụng các chức năng Mod quá lộ liễu ở chế độ xếp hạng (Rank). Nên ưu tiên chơi ở chế độ thường hoặc đấu với máy.</li>
+                    <li>Nếu phát hiện tài khoản có dấu hiệu bị khóa tạm thời, hãy dừng sử dụng mod ngay lập tức và đổi sang tài khoản khác.</li>
+                    <li>Hạn chế thay đổi thiết bị (đăng nhập trên nhiều máy) khi đang sử dụng bản Mod, vì hệ thống Anti-cheat của game có thể quét bất thường.</li>
+                    <li>Không chia sẻ link tải mod cho người lạ hoặc đăng lên các hội nhóm công khai để tránh bị "fix" (vá) mod hoặc bị báo cáo hàng loạt.</li>
+                    <li>Nếu game có bản cập nhật mới (Update), bản Mod cũ sẽ bị lỗi hoặc mất chức năng. Cần chờ Admin cập nhật bản Mod mới.</li>
+                    <li>Mọi rủi ro về tài khoản (mất tài khoản, ban vĩnh viễn) do người dùng tự chịu trách nhiệm.</li>
                 </ul>
             </div>
         </div>
 
         <!-- 2. Android Tab -->
         <div id="android" class="tab-content">
+            <!-- Phần 1 -->
+            <div class="img-container">
+                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFTH" class="tab-main-image" onload="this.classList.add('loaded')">
+            </div>
+            <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFTH</div>
+            <a href="https://traffic19.com/F8OXjOoHn" target="_blank" class="btn-big-link ripple-btn">
+                Vượt Link Ngay (3 Link)
+            </a>
+
+            <!-- Đường kẻ ngăn cách -->
+            <div class="divider"></div>
             
+            <!-- Phần 2 -->
+            <div class="img-container">
+                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602751701782528/IMG_0501.png?ex=6ade3a0a&is=6adce88a&hm=996f4cb647e8bd8e96273e61f4d3ba5da773ec564a7b42c233b4bc36b11eddac&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFM" class="tab-main-image" onload="this.classList.add('loaded')">
+            </div>
+            <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFM</div>
+            <a href="https://link4m.org/Vj09Hb" target="_blank" class="btn-big-link ripple-btn">
+                Vượt Link Ngay (3 Link)
+            </a>
+
+            <!-- Đường kẻ ngăn cách -->
+            <div class="divider"></div>
+            
+            <!-- Phần 3 -->
+            <div class="img-container">
+                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602816755302501/IMG_0506.png?ex=6ade3a19&is=6adce899&hm=a5c041983b546acefade7475e6605ea9789510f8a969dec06101bbea3cad1309&" alt="KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM" class="tab-main-image" onload="this.classList.add('loaded')">
+            </div>
+            <div class="image-desc">KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM</div>
+            <a href="https://link4m.org/Oypm6Sz" target="_blank" class="btn-big-link ripple-btn">
+                Vượt Link Ngay (3 Link)
+            </a>
+
+            <!-- Đường kẻ ngăn cách -->
+            <div class="divider"></div>
+            
+            <!-- Phần Hướng dẫn cài -->
+            <div class="guide-box">
+                <h4>HƯỚNG DẪN CÀI ĐẶT</h4>
+                <a href="https://drive.google.com/file/d/1xMzOb2QMwVHnmR7Yf7LnlsGAbbcZ52Ms/view" target="_blank" class="btn-guide ripple-btn">
+                    Bấm Vào Đây
+                </a>
+            </div>
+
+            <!-- Đường kẻ ngăn cách -->
+            <div class="divider"></div>
+
+            <!-- Phần Lưu ý -->
+            <div class="warning-box">
+                <h4>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+                    LƯU Ý QUAN TRỌNG KHI MOD
+                </h4>
+                <ul>
+                    <li>Khuyến cáo nên test trên <b>tài khoản clone (tài khoản phụ)</b> trước khoảng 1 - 2 ngày. Nếu tài khoản bị ban (khóa), <b>Admin sẽ không chịu trách nhiệm</b>.</li>
+                    <li>Không nên sử dụng các bản mod có tỷ lệ ban cao trên tài khoản chính có nhiều skin/tâm huyết.</li>
+                    <li>Tuyệt đối không khoe khoang, livestream lộ liễu hoặc ghi hình có dấu hiệu bất thường để tránh bị người chơi khác báo cáo (report).</li>
+                    <li>Không sử dụng các chức năng Mod quá lộ liễu ở chế độ xếp hạng (Rank). Nên ưu tiên chơi ở chế độ thường hoặc đấu với máy.</li>
+                    <li>Nếu phát hiện tài khoản có dấu hiệu bị khóa tạm thời, hãy dừng sử dụng mod ngay lập tức và đổi sang tài khoản khác.</li>
+                    <li>Hạn chế thay đổi thiết bị (đăng nhập trên nhiều máy) khi đang sử dụng bản Mod, vì hệ thống Anti-cheat của game có thể quét bất thường.</li>
+                    <li>Không chia sẻ link tải mod cho người lạ hoặc đăng lên các hội nhóm công khai để tránh bị "fix" (vá) mod hoặc bị báo cáo hàng loạt.</li>
+                    <li>Nếu game có bản cập nhật mới (Update), bản Mod cũ sẽ bị lỗi hoặc mất chức năng. Cần chờ Admin cập nhật bản Mod mới.</li>
+                    <li>Mọi rủi ro về tài khoản (mất tài khoản, ban vĩnh viễn) do người dùng tự chịu trách nhiệm.</li>
+                </ul>
+            </div>
         </div>
 
     </div>
+
+    <!-- Nút Lên Đầu Trang -->
+    <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/>
+        </svg>
+    </button>
+
+    <!-- Nút Báo Lỗi -->
+    <button class="report-btn" id="reportBtn" title="Báo lỗi link/ảnh">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+    </button>
+
+    <!-- Toast Message -->
+    <div class="toast" id="toast">Đang chuyển hướng...</div>
 
     <!-- Script điều khiển -->
     <script>
@@ -553,7 +939,258 @@
             }
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
+            playSwoosh(); // Phát âm thanh khi chuyển tab
         }
+
+        // --- Hiệu ứng Avatar 3D Tilt ---
+        const avatarWrapper = document.getElementById('avatarWrapper');
+        const avatarContainer = document.querySelector('.avatar-container');
+
+        avatarContainer.addEventListener('mousemove', (e) => {
+            const rect = avatarContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const rotateX = ((y - centerY) / centerY) * -15;
+            const rotateY = ((x - centerX) / centerX) * 15;
+            
+            avatarWrapper.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+
+        avatarContainer.addEventListener('mouseleave', () => {
+            avatarWrapper.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
+        });
+
+        // --- Hiệu ứng Hạt (Particles) Nền ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        let shootingStars = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+
+        class ParticleBg {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = Math.random() * -0.5 - 0.1;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.speedX *= -1;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        class ShootingStar {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height / 2;
+                this.len = Math.random() * 80 + 50;
+                this.speed = Math.random() * 10 + 5;
+                this.size = Math.random() * 1 + 0.5;
+                this.waitTime = Math.random() * 100 + 50;
+                this.active = false;
+                this.opacity = 1;
+            }
+            update() {
+                if (this.waitTime > 0) {
+                    this.waitTime--;
+                    return;
+                }
+                this.active = true;
+                this.x += this.speed;
+                this.y += this.speed;
+                this.opacity -= 0.02;
+                if (this.x > canvas.width || this.y > canvas.height || this.opacity <= 0) {
+                    this.reset();
+                }
+            }
+            draw() {
+                if (!this.active) return;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.lineWidth = this.size;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - this.len, this.y - this.len);
+                ctx.stroke();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height / 2;
+                this.waitTime = Math.random() * 200 + 100;
+                this.active = false;
+                this.opacity = 1;
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            const count = Math.floor(window.innerWidth / 15);
+            for (let i = 0; i < count; i++) {
+                particlesArray.push(new ParticleBg());
+            }
+            for (let i = 0; i < 3; i++) {
+                shootingStars.push(new ShootingStar());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Vẽ sao băng
+            shootingStars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+
+            // Vẽ hạt kết nối
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                for (let j = i; j < particlesArray.length; j++) {
+                    let dx = particlesArray[i].x - particlesArray[j].x;
+                    let dy = particlesArray[i].y - particlesArray[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance/1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // --- Thanh Tiến Trình Đọc & Nút Lên Đầu Trang / Nút Báo Lỗi ---
+        const progressBar = document.getElementById('progressBar');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        const reportBtn = document.getElementById('reportBtn');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (scrollTop / scrollHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+
+            if (scrollTop > 300) {
+                scrollTopBtn.classList.add('show');
+                reportBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+                reportBtn.classList.remove('show');
+            }
+        });
+
+        // --- Hiệu ứng Ripple (Sóng nước) trên Button ---
+        const rippleButtons = document.querySelectorAll('.ripple-btn');
+        
+        rippleButtons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.left = `${x}px`;
+                ripple.style.top = `${y}px`;
+                
+                this.appendChild(ripple);
+                playPop(); // Phát âm thanh pop
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // --- Hiệu ứng Toast Message khi chuyển hướng ---
+        const toast = document.getElementById('toast');
+        const allLinks = document.querySelectorAll('a[target="_blank"]');
+
+        allLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2500);
+            });
+        });
+
+        // --- Hiệu ứng Shake cho Nút Báo Lỗi ---
+        reportBtn.addEventListener('click', () => {
+            reportBtn.classList.add('shake');
+            playPop();
+            // Mở link báo lỗi
+            window.open('https://discord.gg/t7NCDaRW', '_blank');
+            setTimeout(() => {
+                reportBtn.classList.remove('shake');
+            }, 400);
+        });
+
+        // --- Âm thanh (Sound Effects) ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSwoosh() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
+        }
+
+        function playPop() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.05);
+            gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.05);
+        }
+
+        // --- Chặn Chuột Phải ---
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
     </script>
 
