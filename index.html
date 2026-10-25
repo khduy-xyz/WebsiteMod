@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -383,6 +384,36 @@
             width: 100%;
         }
 
+        /* Sub-Tabs (cho các mục con) */
+        .sub-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+        .sub-tabs::-webkit-scrollbar { display: none; }
+
+        .sub-tab-btn {
+            background: var(--item-bg);
+            border: 1px solid var(--item-border);
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .sub-tab-btn.active {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
         /* Skeleton Loading cho ảnh */
         .img-container {
             width: 100%;
@@ -430,16 +461,24 @@
             text-transform: uppercase;
         }
 
+        /* Nút Container cho 2 nút */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
         /* Nút Vượt Link To */
         .btn-big-link {
-            width: 100%;
+            flex: 1;
             padding: 15px;
             background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
             background-size: 200% auto;
             color: #fff;
             border: none;
             border-radius: 12px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
@@ -450,7 +489,6 @@
             gap: 10px;
             box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
             transition: transform 0.2s, box-shadow 0.2s, background-position 0.3s;
-            margin-bottom: 20px;
             position: relative;
             overflow: hidden;
         }
@@ -468,6 +506,45 @@
         }
 
         .btn-big-link:active {
+            transform: scale(0.98);
+        }
+
+        /* Nút GetKey */
+        .btn-getkey {
+            flex: 0.6;
+            padding: 15px;
+            background: linear-gradient(90deg, #f59e0b, #d97706, #f59e0b);
+            background-size: 200% auto;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s, background-position 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-getkey:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+            background-position: right center;
+            animation: borderGlowGold 2s infinite alternate;
+        }
+
+        @keyframes borderGlowGold {
+            from { box-shadow: 0 0 10px #f59e0b, 0 0 20px #d97706; }
+            to { box-shadow: 0 0 20px #d97706, 0 0 30px #f59e0b; }
+        }
+
+        .btn-getkey:active {
             transform: scale(0.98);
         }
 
@@ -662,6 +739,102 @@
             animation: shake 0.4s ease-in-out;
         }
 
+        /* Modal Popup Chung */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            padding: 25px;
+            border-radius: 16px;
+            width: 85%;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid var(--item-border);
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+        }
+
+        .modal-close:hover {
+            color: var(--text-color);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .modal-content p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .modal-content .btn-modal {
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .modal-content .btn-modal:hover {
+            background: #2563eb;
+        }
+
+        /* Form báo lỗi */
+        .report-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--item-border);
+            background: var(--item-bg);
+            color: var(--text-color);
+            font-family: inherit;
+            margin-bottom: 15px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .report-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
     </style>
 </head>
 <body>
@@ -719,7 +892,7 @@
             </a>
         </div>
 
-        <!-- Thanh Tabs Menu -->
+        <!-- Thanh Tab Menu Chính -->
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab(event, 'ios')">
                 <svg class="tab-icon-svg" viewBox="0 0 24 24">
@@ -734,48 +907,91 @@
         </div>
 
         <!-- Nội dung Tabs -->
+        
         <!-- 1. iOS Tab -->
         <div id="ios" class="tab-content active">
-            <!-- Phần 1 -->
-            <div class="img-container">
-                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="ASTUTECH OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+            <!-- Sub-tabs cho iOS -->
+            <div class="sub-tabs">
+                <button class="sub-tab-btn active" onclick="openSubTab(event, 'ios-game')">Game / Mod</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'ios-app')">Ứng Dụng</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'ios-tweak')">Tiện Ích (Tweak)</button>
             </div>
-            <div class="image-desc">ASTUTECH OB55 ANTIBAN IOS</div>
-            <a href="https://link2m.com/1UtTyc4r" target="_blank" class="btn-big-link ripple-btn">
-                Vượt Link Ngay (3 Link)
-            </a>
 
-            <!-- Đường kẻ ngăn cách -->
-            <div class="divider"></div>
+            <!-- Nội dung Sub-tab: Game / Mod -->
+            <div id="ios-game" class="sub-tab-content" style="display: block;">
+                <!-- Phần 1 -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="ASTUTECH OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">ASTUTECH OB55 ANTIBAN IOS</div>
+                <a href="https://link2m.com/1UtTyc4r" target="_blank" class="btn-big-link ripple-btn">
+                    Vượt Link Ngay (3 Link)
+                </a>
 
-            <!-- Phần 2 -->
-            <div class="img-container">
-                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="KIPAS OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+                <div class="divider"></div>
+
+                <!-- Phần 2 -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="KIPAS OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">KIPAS OB55 ANTIBAN IOS</div>
+                <a href="https://link2m.com/edvIxeV" target="_blank" class="btn-big-link ripple-btn">
+                    Vượt Link Ngay (3 Link)
+                </a>
+
+                <div class="divider"></div>
+
+                <!-- Phần 3 -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563741933795545208/IMG_0512.jpg?ex=6adebba9&is=6add6a29&hm=dc8e139b43bd7c76b96e25b5a3b18a31301a570d4e085f2549cd170f724cef15&" alt="MIGUL OB55 IOS IPA" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">MIGUL OB55 IOS IPA</div>
+                <div class="btn-group">
+                    <a href="https://link2m.com/M0YP8" target="_blank" class="btn-big-link ripple-btn">
+                        Vượt Link Ngay (3 Link)
+                    </a>
+                    <a href="https://link2m.com/xopB3HV" target="_blank" class="btn-getkey ripple-btn">
+                        GetKey
+                    </a>
+                </div>
             </div>
-            <div class="image-desc">KIPAS OB55 ANTIBAN IOS</div>
-            <a href="https://link2m.com/edvIxeV" target="_blank" class="btn-big-link ripple-btn">
-                Vượt Link Ngay (3 Link)
-            </a>
 
-            <!-- Đường kẻ ngăn cách -->
+            <!-- Nội dung Sub-tab: Ứng Dụng -->
+            <div id="ios-app" class="sub-tab-content" style="display: none;">
+                <!-- TikTok Mod (iOS) -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT IPA" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">TIKTOK MOD MỚI NHẤT IPA</div>
+                <a href="https://link4m.net/16l8I0q" target="_blank" class="btn-big-link ripple-btn">
+                    Vượt Link Ngay (2 Link)
+                </a>
+            </div>
+
+            <!-- Nội dung Sub-tab: Tiện Ích -->
+            <div id="ios-tweak" class="sub-tab-content" style="display: none;">
+                <div class="img-container" style="min-height: 150px; display: flex; justify-content: center; align-items: center;">
+                    <p style="color: var(--text-muted);">Đang cập nhật...</p>
+                </div>
+            </div>
+
             <div class="divider"></div>
             
-            <!-- Phần Hướng dẫn cài -->
+            <!-- Phần Hướng dẫn cài (Chung cho iOS) -->
             <div class="guide-box">
-                <h4>HƯỚNG DẪN CÀI ĐẶT</h4>
+                <h4>HƯỚNG DẪN CÀI ĐẶT IOS</h4>
                 <a href="https://drive.google.com/file/d/1c64yC1dTXEBbCv_pmpCf5RTaJAVK-918/view" target="_blank" class="btn-guide ripple-btn">
                     Bấm Vào Đây
                 </a>
             </div>
 
-            <!-- Đường kẻ ngăn cách -->
             <div class="divider"></div>
 
-            <!-- Phần Lưu ý -->
+            <!-- Phần Lưu ý (Chung cho iOS) -->
             <div class="warning-box">
                 <h4>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-                    LƯU Ý QUAN TRỌNG KHI MOD
+                    LƯU Ý QUAN TRỌNG
                 </h4>
                 <ul>
                     <li>Khuyến cáo nên test trên <b>tài khoản clone (tài khoản phụ)</b> trước khoảng 1 - 2 ngày. Nếu tài khoản bị ban (khóa), <b>Admin sẽ không chịu trách nhiệm</b>.</li>
@@ -793,58 +1009,83 @@
 
         <!-- 2. Android Tab -->
         <div id="android" class="tab-content">
-            <!-- Phần 1 -->
-            <div class="img-container">
-                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFTH" class="tab-main-image" onload="this.classList.add('loaded')">
+            <!-- Sub-tabs cho Android -->
+            <div class="sub-tabs">
+                <button class="sub-tab-btn active" onclick="openSubTab(event, 'android-game')">Game / Mod</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'android-app')">Ứng Dụng</button>
+                <button class="sub-tab-btn" onclick="openSubTab(event, 'android-tool')">Tiện Ích</button>
             </div>
-            <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFTH</div>
-            <a href="https://traffic19.com/F8OXjOoHn" target="_blank" class="btn-big-link ripple-btn">
-                Vượt Link Ngay (3 Link)
-            </a>
 
-            <!-- Đường kẻ ngăn cách -->
+            <!-- Nội dung Sub-tab: Game / Mod -->
+            <div id="android-game" class="sub-tab-content" style="display: block;">
+                <!-- Phần 1 -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFTH" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFTH</div>
+                <a href="https://traffic19.com/F8OXjOoHn" target="_blank" class="btn-big-link ripple-btn">
+                    Vượt Link Ngay (3 Link)
+                </a>
+
+                <div class="divider"></div>
+                
+                <!-- Phần 2 -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602751701782528/IMG_0501.png?ex=6ade3a0a&is=6adce88a&hm=996f4cb647e8bd8e96273e61f4d3ba5da773ec564a7b42c233b4bc36b11eddac&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFM" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFM</div>
+                <a href="https://link4m.org/Vj09Hb" target="_blank" class="btn-big-link ripple-btn">
+                    Vượt Link Ngay (3 Link)
+                </a>
+
+                <div class="divider"></div>
+                
+                <!-- Phần 3 -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602816755302501/IMG_0506.png?ex=6ade3a19&is=6adce899&hm=a5c041983b546acefade7475e6605ea9789510f8a969dec06101bbea3cad1309&" alt="KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM</div>
+                <a href="https://link2m.com/AZSo6sTS" target="_blank" class="btn-big-link ripple-btn">
+                    Vượt Link Ngay (3 Link)
+                </a>
+            </div>
+
+            <!-- Nội dung Sub-tab: Ứng Dụng -->
+            <div id="android-app" class="sub-tab-content" style="display: none;">
+                <!-- TikTok Mod (Android) -->
+                <div class="img-container">
+                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT ANDROID" class="tab-main-image" onload="this.classList.add('loaded')">
+                </div>
+                <div class="image-desc">TIKTOK MOD MỚI NHẤT ANDROID</div>
+                <a href="https://link4m.net/Voxtru5C" target="_blank" class="btn-big-link ripple-btn">
+                    Vượt Link Ngay (2 Lần)
+                </a>
+            </div>
+
+            <!-- Nội dung Sub-tab: Tiện Ích -->
+            <div id="android-tool" class="sub-tab-content" style="display: none;">
+                <div class="img-container" style="min-height: 150px; display: flex; justify-content: center; align-items: center;">
+                    <p style="color: var(--text-muted);">Đang cập nhật...</p>
+                </div>
+            </div>
+
             <div class="divider"></div>
             
-            <!-- Phần 2 -->
-            <div class="img-container">
-                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602751701782528/IMG_0501.png?ex=6ade3a0a&is=6adce88a&hm=996f4cb647e8bd8e96273e61f4d3ba5da773ec564a7b42c233b4bc36b11eddac&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFM" class="tab-main-image" onload="this.classList.add('loaded')">
-            </div>
-            <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFM</div>
-            <a href="https://link4m.org/Vj09Hb" target="_blank" class="btn-big-link ripple-btn">
-                Vượt Link Ngay (3 Link)
-            </a>
-
-            <!-- Đường kẻ ngăn cách -->
-            <div class="divider"></div>
-            
-            <!-- Phần 3 -->
-            <div class="img-container">
-                <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602816755302501/IMG_0506.png?ex=6ade3a19&is=6adce899&hm=a5c041983b546acefade7475e6605ea9789510f8a969dec06101bbea3cad1309&" alt="KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM" class="tab-main-image" onload="this.classList.add('loaded')">
-            </div>
-            <div class="image-desc">KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM</div>
-            <a href="https://link4m.org/Oypm6Sz" target="_blank" class="btn-big-link ripple-btn">
-                Vượt Link Ngay (3 Link)
-            </a>
-
-            <!-- Đường kẻ ngăn cách -->
-            <div class="divider"></div>
-            
-            <!-- Phần Hướng dẫn cài -->
+            <!-- Phần Hướng dẫn cài (Chung cho Android) -->
             <div class="guide-box">
-                <h4>HƯỚNG DẪN CÀI ĐẶT</h4>
+                <h4>HƯỚNG DẪN CÀI ĐẶT ANDROID</h4>
                 <a href="https://drive.google.com/file/d/1xMzOb2QMwVHnmR7Yf7LnlsGAbbcZ52Ms/view" target="_blank" class="btn-guide ripple-btn">
                     Bấm Vào Đây
                 </a>
             </div>
 
-            <!-- Đường kẻ ngăn cách -->
             <div class="divider"></div>
 
-            <!-- Phần Lưu ý -->
+            <!-- Phần Lưu ý (Chung cho Android) -->
             <div class="warning-box">
                 <h4>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
-                    LƯU Ý QUAN TRỌNG KHI MOD
+                    LƯU Ý QUAN TRỌNG
                 </h4>
                 <ul>
                     <li>Khuyến cáo nên test trên <b>tài khoản clone (tài khoản phụ)</b> trước khoảng 1 - 2 ngày. Nếu tài khoản bị ban (khóa), <b>Admin sẽ không chịu trách nhiệm</b>.</li>
@@ -879,6 +1120,29 @@
     <!-- Toast Message -->
     <div class="toast" id="toast">Đang chuyển hướng...</div>
 
+    <!-- Modal: Popup Chào Mừng -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeWelcomeModal()">×</button>
+            <h3>Chào Mừng Bạn!</h3>
+            <p>Đây là trang web tổng hợp các bản Mod/Hack, Ứng dụng và Tiện ích mới nhất. Hãy đọc kỹ phần Lưu ý trước khi sử dụng để tránh mất tài khoản.</p>
+            <button class="btn-modal" onclick="closeWelcomeModal()">Đã Hiểu</button>
+        </div>
+    </div>
+
+    <!-- Modal: Form Báo Lỗi -->
+    <div class="modal-overlay" id="reportModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeReportModal()">×</button>
+            <h3>Báo Cáo Lỗi</h3>
+            <p style="margin-bottom: 15px;">Vui lòng nhập mô tả lỗi (link die, ảnh lỗi...) bên dưới.</p>
+            <form class="report-form" onsubmit="submitReport(event)">
+                <textarea id="reportMessage" placeholder="Mô tả lỗi tại đây..." required></textarea>
+                <button type="submit" class="btn-modal">Gửi Báo Cáo</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Script điều khiển -->
     <script>
         // --- Cài đặt Sáng/Tối ---
@@ -899,7 +1163,7 @@
         });
 
         // --- Hiệu ứng gõ chữ ---
-        var text = "Website Mod Skin Free Fire Và Các Thứ Khác";
+        var text = "Website Tổng Hợp Mod, App, Tiện Ích";
         var element = document.getElementById("typewriter-text");
         var typeSpeed = 100, eraseSpeed = 50, delayBetween = 2000, i = 0, isDeleting = false;
 
@@ -926,7 +1190,7 @@
         }
         window.onload = typeWriter;
 
-        // --- Chuyển đổi Tabs ---
+        // --- Chuyển đổi Tabs Chính (iOS/Android) ---
         function openTab(evt, tabName) {
             var tabContents = document.getElementsByClassName("tab-content");
             for (var j = 0; j < tabContents.length; j++) {
@@ -939,6 +1203,27 @@
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
             playSwoosh();
+        }
+
+        // --- Chuyển đổi Sub-Tabs (Game/App/Tiện ích) ---
+        function openSubTab(evt, subTabName) {
+            // Ẩn tất cả nội dung sub-tab trong tab hiện tại
+            var currentTab = evt.currentTarget.closest('.tab-content');
+            var subTabContents = currentTab.getElementsByClassName("sub-tab-content");
+            for (var j = 0; j < subTabContents.length; j++) {
+                subTabContents[j].style.display = "none";
+            }
+            
+            // Xóa active của tất cả sub-tab button trong tab hiện tại
+            var subTabBtns = currentTab.getElementsByClassName("sub-tab-btn");
+            for (var j = 0; j < subTabBtns.length; j++) {
+                subTabBtns[j].classList.remove("active");
+            }
+            
+            // Hiển thị sub-tab được chọn
+            document.getElementById(subTabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+            playPop();
         }
 
         // --- Hiệu ứng Avatar 3D Tilt ---
@@ -1142,16 +1427,6 @@
             });
         });
 
-        // --- Hiệu ứng Shake cho Nút Báo Lỗi ---
-        reportBtn.addEventListener('click', () => {
-            reportBtn.classList.add('shake');
-            playPop();
-            window.open('https://discord.gg/t7NCDaRW', '_blank');
-            setTimeout(() => {
-                reportBtn.classList.remove('shake');
-            }, 400);
-        });
-
         // --- Âm thanh (Sound Effects) ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -1188,7 +1463,50 @@
         // --- Chặn Chuột Phải ---
         document.addEventListener('contextmenu', event => event.preventDefault());
 
+        // --- Xử lý Popup Chào Mừng ---
+        const welcomeModal = document.getElementById('welcomeModal');
+        
+        if (!localStorage.getItem('welcomeShown')) {
+            setTimeout(() => {
+                welcomeModal.classList.add('active');
+            }, 1000);
+        }
+
+        function closeWelcomeModal() {
+            welcomeModal.classList.remove('active');
+            localStorage.setItem('welcomeShown', 'true');
+        }
+
+        // --- Xử lý Form Báo Lỗi ---
+        const reportModal = document.getElementById('reportModal');
+        
+        reportBtn.addEventListener('click', () => {
+            reportModal.classList.add('active');
+            playPop();
+        });
+
+        function closeReportModal() {
+            reportModal.classList.remove('active');
+        }
+
+        function submitReport(event) {
+            event.preventDefault();
+            const message = document.getElementById('reportMessage').value;
+            if (message.trim() === '') return;
+
+            toast.textContent = 'Đã gửi báo cáo! Cảm ơn bạn.';
+            toast.classList.add('show');
+            
+            closeReportModal();
+            document.getElementById('reportMessage').value = '';
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.textContent = 'Đang chuyển hướng...'; 
+            }, 3000);
+        }
     </script>
 
 </body>
 </html>
+```
