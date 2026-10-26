@@ -591,40 +591,6 @@
             margin-bottom: 5px;
         }
 
-        /* Phần Hướng dẫn cài */
-        .guide-box {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .guide-box h4 {
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-        
-        .btn-guide {
-            display: inline-block;
-            padding: 12px 20px;
-            background: var(--accent-color);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.2s;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-guide:hover {
-            background: #2563eb;
-        }
-
         /* Nút Lên Đầu Trang */
         .scroll-top-btn {
             position: fixed;
@@ -691,52 +657,6 @@
         .toast.show {
             bottom: 30px;
             opacity: 1;
-        }
-
-        /* Popup Report */
-        .report-btn {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: #ef4444;
-            color: #fff;
-            border: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            z-index: 99;
-        }
-
-        .report-btn.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .report-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: currentColor;
-        }
-
-        /* Hiệu ứng Shake cho nút báo lỗi */
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
-        }
-
-        .shake {
-            animation: shake 0.4s ease-in-out;
         }
 
         /* Modal Popup Chung */
@@ -814,25 +734,6 @@
 
         .modal-content .btn-modal:hover {
             background: #2563eb;
-        }
-
-        /* Form báo lỗi */
-        .report-form textarea {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid var(--item-border);
-            background: var(--item-bg);
-            color: var(--text-color);
-            font-family: inherit;
-            margin-bottom: 15px;
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .report-form textarea:focus {
-            outline: none;
-            border-color: var(--accent-color);
         }
 
     </style>
@@ -914,7 +815,6 @@
             <div class="sub-tabs">
                 <button class="sub-tab-btn active" onclick="openSubTab(event, 'ios-game')">Game / Mod</button>
                 <button class="sub-tab-btn" onclick="openSubTab(event, 'ios-app')">Ứng Dụng</button>
-                <button class="sub-tab-btn" onclick="openSubTab(event, 'ios-tweak')">Tiện Ích (Tweak)</button>
             </div>
 
             <!-- Nội dung Sub-tab: Game / Mod -->
@@ -924,8 +824,8 @@
                     <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="ASTUTECH OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
                 </div>
                 <div class="image-desc">ASTUTECH OB55 ANTIBAN IOS</div>
-                <a href="" target="_blank" class="btn-big-link ripple-btn">
-                    Vượt Link Ngay (3 Link)
+                <a href="https://byvn.net/4QYL" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/4QYL', '_blank'); event.stopPropagation();">
+                    Vượt Link Ngay
                 </a>
 
                 <div class="divider"></div>
@@ -935,8 +835,8 @@
                     <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="KIPAS OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
                 </div>
                 <div class="image-desc">KIPAS OB55 ANTIBAN IOS</div>
-                <a href="" target="_blank" class="btn-big-link ripple-btn">
-                    Vượt Link Ngay (3 Link)
+                <a href="" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                    Vượt Link Ngay
                 </a>
 
                 <div class="divider"></div>
@@ -947,10 +847,10 @@
                 </div>
                 <div class="image-desc">MIGUL OB55 IOS IPA</div>
                 <div class="btn-group">
-                    <a href="" target="_blank" class="btn-big-link ripple-btn">
-                        Vượt Link Ngay (3 Link)
+                    <a href="" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                        Vượt Link Ngay
                     </a>
-                    <a href="" target="_blank" class="btn-getkey ripple-btn">
+                    <a href="" target="_blank" class="btn-getkey ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
                         GetKey
                     </a>
                 </div>
@@ -963,30 +863,13 @@
                     <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT IPA" class="tab-main-image" onload="this.classList.add('loaded')">
                 </div>
                 <div class="image-desc">TIKTOK MOD MỚI NHẤT IPA</div>
-                <a href="" target="_blank" class="btn-big-link ripple-btn">
-                    Vượt Link Ngay (2 Link)
+                <a href="" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                    Vượt Link Ngay
                 </a>
-            </div>
-
-            <!-- Nội dung Sub-tab: Tiện Ích -->
-            <div id="ios-tweak" class="sub-tab-content" style="display: none;">
-                <div class="img-container" style="min-height: 150px; display: flex; justify-content: center; align-items: center;">
-                    <p style="color: var(--text-muted);">Đang cập nhật...</p>
-                </div>
             </div>
 
             <div class="divider"></div>
             
-            <!-- Phần Hướng dẫn cài (Chung cho iOS) -->
-            <div class="guide-box">
-                <h4>HƯỚNG DẪN CÀI ĐẶT IOS</h4>
-                <a href="https://drive.google.com/file/d/1c64yC1dTXEBbCv_pmpCf5RTaJAVK-918/view" target="_blank" class="btn-guide ripple-btn">
-                    Bấm Vào Đây
-                </a>
-            </div>
-
-            <div class="divider"></div>
-
             <!-- Phần Lưu ý (Chung cho iOS) -->
             <div class="warning-box">
                 <h4>
@@ -1013,7 +896,6 @@
             <div class="sub-tabs">
                 <button class="sub-tab-btn active" onclick="openSubTab(event, 'android-game')">Game / Mod</button>
                 <button class="sub-tab-btn" onclick="openSubTab(event, 'android-app')">Ứng Dụng</button>
-                <button class="sub-tab-btn" onclick="openSubTab(event, 'android-tool')">Tiện Ích</button>
             </div>
 
             <!-- Nội dung Sub-tab: Game / Mod -->
@@ -1023,8 +905,8 @@
                     <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFTH" class="tab-main-image" onload="this.classList.add('loaded')">
                 </div>
                 <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFTH</div>
-                <a href="" target="_blank" class="btn-big-link ripple-btn">
-                    Vượt Link Ngay (3 Link)
+                <a href="" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                    Vượt Link Ngay
                 </a>
 
                 <div class="divider"></div>
@@ -1034,8 +916,8 @@
                     <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602751701782528/IMG_0501.png?ex=6ade3a0a&is=6adce88a&hm=996f4cb647e8bd8e96273e61f4d3ba5da773ec564a7b42c233b4bc36b11eddac&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFM" class="tab-main-image" onload="this.classList.add('loaded')">
                 </div>
                 <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFM</div>
-                <a href="" target="_blank" class="btn-big-link ripple-btn">
-                    Vượt Link Ngay (3 Link)
+                <a href="" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                    Vượt Link Ngay
                 </a>
 
                 <div class="divider"></div>
@@ -1045,8 +927,8 @@
                     <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602816755302501/IMG_0506.png?ex=6ade3a19&is=6adce899&hm=a5c041983b546acefade7475e6605ea9789510f8a969dec06101bbea3cad1309&" alt="KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM" class="tab-main-image" onload="this.classList.add('loaded')">
                 </div>
                 <div class="image-desc">KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM</div>
-                <a href="" target="_blank" class="btn-big-link ripple-btn">
-                    Vượt Link Ngay (3 Link)
+                <a href="" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                    Vượt Link Ngay
                 </a>
             </div>
 
@@ -1057,25 +939,8 @@
                     <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT ANDROID" class="tab-main-image" onload="this.classList.add('loaded')">
                 </div>
                 <div class="image-desc">TIKTOK MOD MỚI NHẤT ANDROID</div>
-                <a href="" target="_blank" class="btn-big-link ripple-btn">
-                    Vượt Link Ngay (2 Lần)
-                </a>
-            </div>
-
-            <!-- Nội dung Sub-tab: Tiện Ích -->
-            <div id="android-tool" class="sub-tab-content" style="display: none;">
-                <div class="img-container" style="min-height: 150px; display: flex; justify-content: center; align-items: center;">
-                    <p style="color: var(--text-muted);">Đang cập nhật...</p>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-            
-            <!-- Phần Hướng dẫn cài (Chung cho Android) -->
-            <div class="guide-box">
-                <h4>HƯỚNG DẪN CÀI ĐẶT ANDROID</h4>
-                <a href="https://drive.google.com/file/d/1xMzOb2QMwVHnmR7Yf7LnlsGAbbcZ52Ms/view" target="_blank" class="btn-guide ripple-btn">
-                    Bấm Vào Đây
+                <a href="" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                    Vượt Link Ngay
                 </a>
             </div>
 
@@ -1110,13 +975,6 @@
         </svg>
     </button>
 
-    <!-- Nút Báo Lỗi -->
-    <button class="report-btn" id="reportBtn" title="Báo lỗi link/ảnh">
-        <svg viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-        </svg>
-    </button>
-
     <!-- Toast Message -->
     <div class="toast" id="toast">Đang chuyển hướng...</div>
 
@@ -1127,19 +985,6 @@
             <h3>Chào Mừng Bạn!</h3>
             <p>Đây là trang web tổng hợp các bản Mod/Hack, Ứng dụng và Tiện ích mới nhất. Hãy đọc kỹ phần Lưu ý trước khi sử dụng để tránh mất tài khoản.</p>
             <button class="btn-modal" onclick="closeWelcomeModal()">Đã Hiểu</button>
-        </div>
-    </div>
-
-    <!-- Modal: Form Báo Lỗi -->
-    <div class="modal-overlay" id="reportModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeReportModal()">×</button>
-            <h3>Báo Cáo Lỗi</h3>
-            <p style="margin-bottom: 15px;">Vui lòng nhập mô tả lỗi (link die, ảnh lỗi...) bên dưới.</p>
-            <form class="report-form" onsubmit="submitReport(event)">
-                <textarea id="reportMessage" placeholder="Mô tả lỗi tại đây..." required></textarea>
-                <button type="submit" class="btn-modal">Gửi Báo Cáo</button>
-            </form>
         </div>
     </div>
 
@@ -1205,7 +1050,7 @@
             playSwoosh();
         }
 
-        // --- Chuyển đổi Sub-Tabs (Game/App/Tiện ích) ---
+        // --- Chuyển đổi Sub-Tabs (Game/App) ---
         function openSubTab(evt, subTabName) {
             // Ẩn tất cả nội dung sub-tab trong tab hiện tại
             var currentTab = evt.currentTarget.closest('.tab-content');
@@ -1372,10 +1217,9 @@
         }
         animateParticles();
 
-        // --- Thanh Tiến Trình Đọc & Nút Lên Đầu Trang / Nút Báo Lỗi ---
+        // --- Thanh Tiến Trình Đọc & Nút Lên Đầu Trang ---
         const progressBar = document.getElementById('progressBar');
         const scrollTopBtn = document.getElementById('scrollTopBtn');
-        const reportBtn = document.getElementById('reportBtn');
 
         window.addEventListener('scroll', () => {
             const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
@@ -1385,10 +1229,8 @@
 
             if (scrollTop > 300) {
                 scrollTopBtn.classList.add('show');
-                reportBtn.classList.add('show');
             } else {
                 scrollTopBtn.classList.remove('show');
-                reportBtn.classList.remove('show');
             }
         });
 
@@ -1421,7 +1263,8 @@
         allLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 // Chỉ hiện toast nếu link có href thực sự
-                if (link.getAttribute('href') !== '' && link.getAttribute('href') !== '#') {
+                const href = link.getAttribute('href');
+                if (href && href !== '#' && href !== '') {
                     toast.classList.add('show');
                     setTimeout(() => {
                         toast.classList.remove('show');
@@ -1478,35 +1321,6 @@
         function closeWelcomeModal() {
             welcomeModal.classList.remove('active');
             localStorage.setItem('welcomeShown', 'true');
-        }
-
-        // --- Xử lý Form Báo Lỗi ---
-        const reportModal = document.getElementById('reportModal');
-        
-        reportBtn.addEventListener('click', () => {
-            reportModal.classList.add('active');
-            playPop();
-        });
-
-        function closeReportModal() {
-            reportModal.classList.remove('active');
-        }
-
-        function submitReport(event) {
-            event.preventDefault();
-            const message = document.getElementById('reportMessage').value;
-            if (message.trim() === '') return;
-
-            toast.textContent = 'Đã gửi báo cáo! Cảm ơn bạn.';
-            toast.classList.add('show');
-            
-            closeReportModal();
-            document.getElementById('reportMessage').value = '';
-
-            setTimeout(() => {
-                toast.classList.remove('show');
-                toast.textContent = 'Đang chuyển hướng...'; 
-            }, 3000);
         }
     </script>
 
