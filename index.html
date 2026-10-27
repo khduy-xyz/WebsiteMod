@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Khuong Duy</title>
     <style>
-        /* Khai báo biến màu cho chế độ tối (mặc định) */
         :root {
             --bg-gradient-start: #1a1a2e;
             --bg-gradient-end: #0f0f1a;
@@ -21,7 +20,6 @@
             --card-border: rgba(255, 255, 255, 0.1);
         }
 
-        /* Ghi đè biến màu cho chế độ sáng */
         body.light-mode {
             --bg-gradient-start: #f0f2f5;
             --bg-gradient-end: #e4e6eb;
@@ -37,7 +35,6 @@
             --card-border: rgba(0, 0, 0, 0.1);
         }
 
-        /* Reset CSS cơ bản */
         * {
             margin: 0;
             padding: 0;
@@ -46,7 +43,6 @@
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
-        /* Nền gradient động toàn trang */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -66,7 +62,6 @@
             overflow-x: hidden;
         }
 
-        /* Canvas hạt bụi */
         #particle-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -74,7 +69,6 @@
             pointer-events: none;
         }
 
-        /* Thanh Header */
         .header {
             width: 100%;
             padding: 15px 20px;
@@ -111,7 +105,6 @@
             gap: 10px;
         }
 
-        /* Nút icon chung */
         .icon-btn {
             width: 36px;
             height: 36px;
@@ -133,7 +126,6 @@
             fill: currentColor;
         }
 
-        /* Khung chứa chính */
         .container {
             width: 100%;
             max-width: 450px;
@@ -141,7 +133,6 @@
             position: relative;
         }
 
-        /* Phần Avatar */
         .avatar-container {
             display: flex;
             justify-content: center;
@@ -150,21 +141,18 @@
             position: relative;
         }
 
-        /* Hiệu ứng viền nháy màu */
         @keyframes colorGlow {
             0% { background: #00d2ff; box-shadow: 0 0 20px rgba(0, 210, 255, 0.6); }
             50% { background: #cb43ce; box-shadow: 0 0 20px rgba(203, 67, 206, 0.6); }
             100% { background: #00d2ff; box-shadow: 0 0 20px rgba(0, 210, 255, 0.6); }
         }
 
-        /* Hiệu ứng phập phồng cho Avatar */
         @keyframes heartbeat {
             0% { transform: scale(1); }
             50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
 
-        /* Hiệu ứng 3D Tilt */
         .avatar-wrapper {
             width: 140px;
             height: 140px;
@@ -189,7 +177,6 @@
             pointer-events: none;
         }
 
-        /* Hiệu ứng sóng âm (Aura) cho Avatar */
         .avatar-wrapper::before,
         .avatar-wrapper::after {
             content: '';
@@ -211,7 +198,6 @@
             100% { transform: scale(1.3); opacity: 0; }
         }
 
-        /* Thông tin cá nhân */
         .profile-info {
             text-align: center;
             margin-bottom: 25px;
@@ -245,14 +231,12 @@
              -webkit-text-fill-color: transparent;
         }
 
-        /* Icon tích xanh */
         .verified-icon {
             width: 24px;
             height: 24px;
             filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
         }
 
-        /* Hiệu ứng chữ động với Gradient */
         .subtitle {
             font-size: 0.85rem;
             font-weight: bold;
@@ -262,7 +246,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            
             background: linear-gradient(90deg, #63CCE0, #CB43CE, #63CCE0);
             background-size: 200% auto;
             -webkit-background-clip: text;
@@ -273,7 +256,6 @@
             margin-bottom: 20px;
         }
 
-        /* Nút liên hệ (Discord, Telegram, YouTube) */
         .contact-methods {
             display: flex;
             justify-content: center;
@@ -305,7 +287,6 @@
             height: 30px;
         }
 
-        /* Thanh Tab Menu */
         .tabs {
             display: flex;
             justify-content: center;
@@ -350,7 +331,6 @@
             fill: #fff;
         }
 
-        /* Icon trong Tab */
         .tab-icon-svg {
             width: 20px;
             height: 20px;
@@ -364,7 +344,6 @@
             object-fit: contain;
         }
 
-        /* Nội dung Tabs & Hiệu ứng chuyển tab */
         .tab-content {
             display: none;
             flex-direction: column;
@@ -381,7 +360,6 @@
             to { opacity: 1; transform: translateX(0); }
         }
 
-        /* Đường kẻ ngăn cách */
         .divider {
             height: 1px;
             background: var(--item-border);
@@ -389,7 +367,6 @@
             width: 100%;
         }
 
-        /* Sub-Tabs (cho các mục con) */
         .sub-tabs {
             display: flex;
             gap: 10px;
@@ -419,7 +396,6 @@
             border-color: var(--accent-color);
         }
 
-        /* Khung thẻ bài đăng (Card) */
         .post-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -431,7 +407,6 @@
             -webkit-backdrop-filter: blur(10px);
         }
 
-        /* Ảnh trong thẻ */
         .img-container {
             width: 100%;
             position: relative;
@@ -444,12 +419,10 @@
             display: block;
         }
 
-        /* Nội dung dưới ảnh của thẻ */
         .post-content {
             padding: 15px;
         }
 
-        /* Icon game và tiêu đề */
         .post-header {
             display: flex;
             align-items: center;
@@ -483,7 +456,6 @@
             font-style: italic;
         }
 
-        /* Nút Tải và Get Key */
         .btn-group {
             display: flex;
             gap: 10px;
@@ -545,7 +517,6 @@
             fill: currentColor;
         }
 
-        /* Phần Lưu ý & Hướng dẫn */
         .warning-box {
             background: rgba(255, 153, 0, 0.1);
             border: 1px solid rgba(255, 153, 0, 0.3);
@@ -574,7 +545,6 @@
             margin-bottom: 5px;
         }
 
-        /* Nút Lên Đầu Trang */
         .scroll-top-btn {
             position: fixed;
             bottom: 20px;
@@ -601,7 +571,6 @@
             visibility: visible;
         }
 
-        /* Thanh Tiến Trình Đọc */
         .progress-container {
             position: fixed;
             top: 0;
@@ -618,7 +587,6 @@
             width: 0%;
         }
 
-        /* Toast Message */
         .toast {
             position: fixed;
             bottom: -50px;
@@ -642,7 +610,6 @@
             opacity: 1;
         }
 
-        /* Modal Popup Chung */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -719,7 +686,6 @@
             background: #2563eb;
         }
         
-        /* Phần Footer Bản Quyền */
         .footer {
             width: 100%;
             text-align: center;
@@ -729,22 +695,17 @@
             border-top: 1px solid var(--item-border);
             margin-top: 20px;
         }
-
     </style>
 </head>
 <body>
 
-    <!-- Thanh Tiến Trình Đọc -->
     <div class="progress-container">
         <div class="progress-bar" id="progressBar"></div>
     </div>
 
-    <!-- Canvas hạt bụi -->
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Thanh Header -->
     <div class="header">
-        <!-- Nút Thông báo (Trái) -->
         <button class="icon-btn" title="Thông báo">
             <svg viewBox="0 0 24 24">
                 <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
@@ -754,7 +715,6 @@
         <div class="header-title">Khuong Duy</div>
         
         <div class="header-actions">
-            <!-- Nút đổi sáng tối (Phải) -->
             <button class="icon-btn" id="themeToggle" title="Chế độ Sáng/Tối">
                 <svg id="moonIcon" viewBox="0 0 24 24">
                     <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
@@ -767,14 +727,12 @@
     </div>
 
     <div class="container">
-        <!-- Avatar -->
         <div class="avatar-container">
             <div class="avatar-wrapper" id="avatarWrapper">
                 <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563637421743276032/aa4fe4bfef3d90caff36283ab86f635e.webp?ex=6ade5a54&is=6add08d4&hm=7a148123609c701ff6608772fc5ea0a68d106fb07a3ed6b3f28cdebbd4bdcaf4&" alt="Avatar Khuong Duy">
             </div>
         </div>
 
-        <!-- Thông tin cá nhân -->
         <div class="profile-info">
             <div class="greeting" style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 5px;">Hi, i am</div>
             <div class="name-container">
@@ -786,21 +744,17 @@
             <div class="subtitle" id="typewriter-text"></div>
         </div>
 
-        <!-- Nút liên hệ (Discord, Telegram, YouTube) -->
         <div class="contact-methods">
-            <!-- Discord -->
             <a href="https://discord.gg/t7NCDaRW" target="_blank" class="contact-btn">
                 <svg viewBox="0 0 24 24" fill="#5865F2">
                     <path d="M17.79 7.043a12.748 12.748 0 0 0-3.138-.972.047.047 0 0 0-.05.024c-.136.24-.286.554-.391.8a11.798 11.798 0 0 0-3.522 0 8.346 8.346 0 0 0-.398-.8.05.05 0 0 0-.05-.024 12.715 12.715 0 0 0-3.137.972.043.043 0 0 0-.02.018C5.343 10.048 4.793 12.958 5.063 15.83a.053.053 0 0 0 .02.036 12.837 12.837 0 0 0 3.858 1.95.048.048 0 0 0 .054-.018c.297-.405.561-.834.789-1.284a.05.05 0 0 0-.027-.068 8.61 8.61 0 0 1-1.205-.574.049.049 0 0 1-.005-.082c.08-.061.162-.124.24-.188a.048.048 0 0 1 .05-.006c2.528 1.154 5.266 1.154 7.766 0a.048.048 0 0 1 .05.006c.079.064.16.127.241.188a.049.049 0 0 1-.005.082c-.384.224-.785.416-1.206.574a.05.05 0 0 0-.026.068c.232.45.496.879.788 1.284a.048.048 0 0 0 .054.018 12.801 12.801 0 0 0 3.864-1.95.053.053 0 0 0 .02-.036c.32-3.317-.538-6.203-2.227-8.769a.042.042 0 0 0-.021-.018zM9.166 14.204c-.762 0-1.39-.7-1.39-1.56s.616-1.56 1.39-1.56c.78 0 1.402.707 1.39 1.56 0 .86-.617 1.56-1.39 1.56zm5.136 0c-.762 0-1.389-.7-1.389-1.56s.616-1.56 1.389-1.56c.78 0 1.403.707 1.39 1.56 0 .86-.61 1.56-1.39 1.56z"/>
                 </svg>
             </a>
-            <!-- Telegram -->
             <a href="" class="contact-btn">
                 <svg viewBox="0 0 24 24" fill="#229ED9">
                     <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                 </svg>
             </a>
-            <!-- YouTube -->
             <a href="" class="contact-btn">
                 <svg viewBox="0 0 24 24" fill="#FF0000">
                     <path d="M21.582 6.186a2.5 2.5 0 0 0-1.763-1.763C18.25 4 12 4 12 4s-6.25 0-7.82.423A2.5 2.5 0 0 0 2.418 6.186C2 7.755 2 12 2 12s0 4.245.418 5.814a2.5 2.5 0 0 0 1.763 1.763C5.75 20 12 20 12 20s6.25 0 7.82-.423a2.5 2.5 0 0 0 1.763-1.763C22 16.245 22 12 22 12s0-4.245-.418-5.814zM9.916 15.116V8.884L15.416 12l-5.5 3.116z"/>
@@ -808,7 +762,6 @@
             </a>
         </div>
 
-        <!-- Thanh Tab Menu Chính -->
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab(event, 'ios')">
                 <svg class="tab-icon-svg" viewBox="0 0 24 24">
@@ -822,11 +775,8 @@
             </button>
         </div>
 
-        <!-- Nội dung Tabs -->
-        
         <!-- 1. iOS Tab -->
         <div id="ios" class="tab-content active">
-            <!-- Sub-tabs cho iOS -->
             <div class="sub-tabs">
                 <button class="sub-tab-btn active" onclick="openSubTab(event, 'ios-game')">Game / Mod</button>
                 <button class="sub-tab-btn" onclick="openSubTab(event, 'ios-app')">Ứng Dụng</button>
@@ -849,7 +799,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/mefQd4" target="_blank" rel="noopener noreferrer" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
@@ -871,7 +821,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/1A2QW" target="_blank" rel="noopener noreferrer" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
@@ -893,11 +843,11 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/plHUxP" target="_blank" rel="noopener noreferrer" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
-                            <a href="" target="_blank" class="btn-getkey-new ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/EBChL2" target="_blank" rel="noopener noreferrer" class="btn-getkey-new ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
                                 Get Key
                             </a>
@@ -908,7 +858,6 @@
 
             <!-- Nội dung Sub-tab: Ứng Dụng -->
             <div id="ios-app" class="sub-tab-content" style="display: none;">
-                <!-- Thẻ Bài Đăng TikTok (iOS) -->
                 <div class="post-card">
                     <div class="img-container">
                         <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT IPA" class="tab-main-image">
@@ -922,7 +871,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/clMut00S" target="_blank" rel="noopener noreferrer" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
@@ -933,7 +882,6 @@
 
             <div class="divider"></div>
             
-            <!-- Phần Lưu ý (Chung cho iOS) -->
             <div class="warning-box">
                 <h4>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
@@ -955,7 +903,6 @@
 
         <!-- 2. Android Tab -->
         <div id="android" class="tab-content">
-            <!-- Sub-tabs cho Android -->
             <div class="sub-tabs">
                 <button class="sub-tab-btn active" onclick="openSubTab(event, 'android-game')">Game / Mod</button>
                 <button class="sub-tab-btn" onclick="openSubTab(event, 'android-app')">Ứng Dụng</button>
@@ -978,7 +925,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/HlA7fX" target="_blank" rel="noopener noreferrer" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
@@ -1000,7 +947,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/fy2epTF" target="_blank" rel="noopener noreferrer" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
@@ -1022,7 +969,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="" target="_blank" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
@@ -1033,7 +980,6 @@
 
             <!-- Nội dung Sub-tab: Ứng Dụng -->
             <div id="android-app" class="sub-tab-content" style="display: none;">
-                <!-- Thẻ Bài Đăng TikTok (Android) -->
                 <div class="post-card">
                     <div class="img-container">
                         <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT ANDROID" class="tab-main-image">
@@ -1047,7 +993,7 @@
                             </div>
                         </div>
                         <div class="btn-group">
-                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                            <a href="https://1short.link/l/02GEh0Hi" target="_blank" rel="noopener noreferrer" class="btn-download ripple-btn">
                                 <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                                 Download
                             </a>
@@ -1058,7 +1004,6 @@
 
             <div class="divider"></div>
 
-            <!-- Phần Lưu ý (Chung cho Android) -->
             <div class="warning-box">
                 <h4>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
@@ -1080,22 +1025,18 @@
 
     </div>
 
-    <!-- Footer Bản Quyền -->
     <div class="footer">
         &copy; Designer by Khuong Duy 2026
     </div>
 
-    <!-- Nút Lên Đầu Trang -->
     <button class="scroll-top-btn" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
         <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/>
         </svg>
     </button>
 
-    <!-- Toast Message -->
     <div class="toast" id="toast">Đang chuyển hướng...</div>
 
-    <!-- Modal: Popup Chào Mừng -->
     <div class="modal-overlay" id="welcomeModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeWelcomeModal()">×</button>
@@ -1105,9 +1046,7 @@
         </div>
     </div>
 
-    <!-- Script điều khiển -->
     <script>
-        // --- Cài đặt Sáng/Tối ---
         const themeToggleBtn = document.getElementById('themeToggle');
         const moonIcon = document.getElementById('moonIcon');
         const sunIcon = document.getElementById('sunIcon');
@@ -1124,7 +1063,6 @@
             }
         });
 
-        // --- Hiệu ứng gõ chữ ---
         var text = "and i'm a Youtuber";
         var element = document.getElementById("typewriter-text");
         var typeSpeed = 100, eraseSpeed = 50, delayBetween = 2000, i = 0, isDeleting = false;
@@ -1152,7 +1090,6 @@
         }
         window.onload = typeWriter;
 
-        // --- Chuyển đổi Tabs Chính (iOS/Android) ---
         function openTab(evt, tabName) {
             var tabContents = document.getElementsByClassName("tab-content");
             for (var j = 0; j < tabContents.length; j++) {
@@ -1167,28 +1104,21 @@
             playSwoosh();
         }
 
-        // --- Chuyển đổi Sub-Tabs (Game/App) ---
         function openSubTab(evt, subTabName) {
-            // Ẩn tất cả nội dung sub-tab trong tab hiện tại
             var currentTab = evt.currentTarget.closest('.tab-content');
             var subTabContents = currentTab.getElementsByClassName("sub-tab-content");
             for (var j = 0; j < subTabContents.length; j++) {
                 subTabContents[j].style.display = "none";
             }
-            
-            // Xóa active của tất cả sub-tab button trong tab hiện tại
             var subTabBtns = currentTab.getElementsByClassName("sub-tab-btn");
             for (var j = 0; j < subTabBtns.length; j++) {
                 subTabBtns[j].classList.remove("active");
             }
-            
-            // Hiển thị sub-tab được chọn
             document.getElementById(subTabName).style.display = "block";
             evt.currentTarget.classList.add("active");
             playPop();
         }
 
-        // --- Hiệu ứng Avatar 3D Tilt ---
         const avatarWrapper = document.getElementById('avatarWrapper');
         const avatarContainer = document.querySelector('.avatar-container');
 
@@ -1196,13 +1126,10 @@
             const rect = avatarContainer.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            
             const rotateX = ((y - centerY) / centerY) * -15;
             const rotateY = ((x - centerX) / centerX) * 15;
-            
             avatarWrapper.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
         });
 
@@ -1210,7 +1137,6 @@
             avatarWrapper.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale(1)`;
         });
 
-        // --- Hiệu ứng Hạt (Particles) Nền ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particlesArray = [];
@@ -1334,7 +1260,6 @@
         }
         animateParticles();
 
-        // --- Thanh Tiến Trình Đọc & Nút Lên Đầu Trang ---
         const progressBar = document.getElementById('progressBar');
         const scrollTopBtn = document.getElementById('scrollTopBtn');
 
@@ -1351,7 +1276,6 @@
             }
         });
 
-        // --- Hiệu ứng Ripple (Sóng nước) trên Button ---
         const rippleButtons = document.querySelectorAll('.ripple-btn');
         
         rippleButtons.forEach(btn => {
@@ -1373,13 +1297,11 @@
             });
         });
 
-        // --- Hiệu ứng Toast Message khi chuyển hướng ---
         const toast = document.getElementById('toast');
         const allLinks = document.querySelectorAll('a[target="_blank"]');
 
         allLinks.forEach(link => {
             link.addEventListener('click', (e) => {
-                // Chỉ hiện toast nếu link có href thực sự
                 const href = link.getAttribute('href');
                 if (href && href !== '#' && href !== '') {
                     toast.classList.add('show');
@@ -1390,7 +1312,6 @@
             });
         });
 
-        // --- Âm thanh (Sound Effects) ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSwoosh() {
@@ -1423,10 +1344,8 @@
             osc.stop(audioCtx.currentTime + 0.05);
         }
 
-        // --- Chặn Chuột Phải ---
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // --- Xử lý Popup Chào Mừng ---
         const welcomeModal = document.getElementById('welcomeModal');
         
         if (!localStorage.getItem('welcomeShown')) {
