@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -18,6 +17,8 @@
             --icon-btn-bg: rgba(255, 255, 255, 0.1);
             --modal-bg: rgba(30, 30, 40, 0.95);
             --accent-color: #3b82f6;
+            --card-bg: rgba(30, 30, 40, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
         }
 
         /* Ghi đè biến màu cho chế độ sáng */
@@ -32,6 +33,8 @@
             --icon-btn-bg: rgba(0, 0, 0, 0.05);
             --modal-bg: rgba(255, 255, 255, 0.95);
             --accent-color: #1d4ed8;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(0, 0, 0, 0.1);
         }
 
         /* Reset CSS cơ bản */
@@ -270,7 +273,7 @@
             margin-bottom: 20px;
         }
 
-        /* Nút liên hệ (Discord) */
+        /* Nút liên hệ (Discord, Telegram, YouTube) */
         .contact-methods {
             display: flex;
             justify-content: center;
@@ -281,23 +284,25 @@
         .contact-btn {
             width: 55px;
             height: 55px;
-            border-radius: 50%;
+            border-radius: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             text-decoration: none;
-            background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
+            background-color: var(--item-bg);
+            border: 1px solid var(--item-border);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background-color 0.2s;
         }
 
         .contact-btn:hover {
             transform: scale(1.05);
+            background-color: var(--icon-btn-bg);
         }
 
         .contact-btn svg {
-            width: 55px;
-            height: 55px;
+            width: 30px;
+            height: 30px;
         }
 
         /* Thanh Tab Menu */
@@ -414,71 +419,110 @@
             border-color: var(--accent-color);
         }
 
-        /* Skeleton Loading cho ảnh */
+        /* Khung thẻ bài đăng (Card) */
+        .post-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Ảnh trong thẻ */
         .img-container {
             width: 100%;
             position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            background: var(--item-bg);
-            min-height: 200px;
-        }
-
-        /* Hiệu ứng tải */
-        .img-container::before {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            100% { left: 100%; }
+            background: #000;
         }
 
         .tab-main-image {
             width: 100%;
             height: auto;
             display: block;
-            opacity: 0;
-            transition: opacity 0.3s;
         }
 
-        .tab-main-image.loaded {
-            opacity: 1;
+        /* Nội dung dưới ảnh của thẻ */
+        .post-content {
+            padding: 15px;
         }
 
-        /* Mô tả ảnh */
-        .image-desc {
-            text-align: center;
-            font-size: 1.1rem;
+        /* Icon game và tiêu đề */
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .post-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid var(--item-border);
+        }
+
+        .post-title-group {
+            flex: 1;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
             font-weight: bold;
             color: var(--text-color);
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             text-transform: uppercase;
         }
 
-        /* Nút Container cho 2 nút */
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Nút Tải và Get Key */
         .btn-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 20px;
             width: 100%;
         }
 
-        /* Nút Vượt Link To */
-        .btn-big-link {
+        .btn-download {
+            flex: 1.5;
+            padding: 15px;
+            background: linear-gradient(90deg, #7b61ff, #a064ff);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(123, 97, 255, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(123, 97, 255, 0.6);
+        }
+
+        .btn-getkey-new {
             flex: 1;
             padding: 15px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #3b82f6);
-            background-size: 200% auto;
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #a064ff;
+            border-radius: 30px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
@@ -486,80 +530,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s, background-position 0.3s;
-            position: relative;
-            overflow: hidden;
+            gap: 8px;
+            transition: background 0.2s, border-color 0.2s;
         }
 
-        .btn-big-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-            background-position: right center;
-            animation: borderGlow 2s infinite alternate;
+        .btn-getkey-new:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #a064ff;
         }
 
-        @keyframes borderGlow {
-            from { box-shadow: 0 0 10px #3b82f6, 0 0 20px #8b5cf6; }
-            to { box-shadow: 0 0 20px #8b5cf6, 0 0 30px #3b82f6; }
-        }
-
-        .btn-big-link:active {
-            transform: scale(0.98);
-        }
-
-        /* Nút GetKey */
-        .btn-getkey {
-            flex: 0.6;
-            padding: 15px;
-            background: linear-gradient(90deg, #f59e0b, #d97706, #f59e0b);
-            background-size: 200% auto;
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s, background-position 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-getkey:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
-            background-position: right center;
-            animation: borderGlowGold 2s infinite alternate;
-        }
-
-        @keyframes borderGlowGold {
-            from { box-shadow: 0 0 10px #f59e0b, 0 0 20px #d97706; }
-            to { box-shadow: 0 0 20px #d97706, 0 0 30px #f59e0b; }
-        }
-
-        .btn-getkey:active {
-            transform: scale(0.98);
-        }
-
-        /* Hiệu ứng Ripple (Sóng nước) */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            transform: scale(0);
-            animation: ripple-anim 0.6s linear;
-            pointer-events: none;
-        }
-        
-        @keyframes ripple-anim {
-            to { transform: scale(4); opacity: 0; }
+        .btn-icon-svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
         }
 
         /* Phần Lưu ý & Hướng dẫn */
@@ -735,6 +718,17 @@
         .modal-content .btn-modal:hover {
             background: #2563eb;
         }
+        
+        /* Phần Footer Bản Quyền */
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--item-border);
+            margin-top: 20px;
+        }
 
     </style>
 </head>
@@ -750,9 +744,17 @@
 
     <!-- Thanh Header -->
     <div class="header">
+        <!-- Nút Thông báo (Trái) -->
+        <button class="icon-btn" title="Thông báo">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+            </svg>
+        </button>
+
         <div class="header-title">Khuong Duy</div>
+        
         <div class="header-actions">
-            <!-- Nút đổi sáng tối -->
+            <!-- Nút đổi sáng tối (Phải) -->
             <button class="icon-btn" id="themeToggle" title="Chế độ Sáng/Tối">
                 <svg id="moonIcon" viewBox="0 0 24 24">
                     <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>
@@ -774,6 +776,7 @@
 
         <!-- Thông tin cá nhân -->
         <div class="profile-info">
+            <div class="greeting" style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 5px;">Hi, i am</div>
             <div class="name-container">
                 <div class="name">Khuong Duy</div>
                 <svg class="verified-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -783,12 +786,24 @@
             <div class="subtitle" id="typewriter-text"></div>
         </div>
 
-        <!-- Nút liên hệ (Discord) -->
+        <!-- Nút liên hệ (Discord, Telegram, YouTube) -->
         <div class="contact-methods">
+            <!-- Discord -->
             <a href="https://discord.gg/t7NCDaRW" target="_blank" class="contact-btn">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="12" fill="#5865F2"/>
-                    <path d="M17.79 7.043a12.748 12.748 0 0 0-3.138-.972.047.047 0 0 0-.05.024c-.136.24-.286.554-.391.8a11.798 11.798 0 0 0-3.522 0 8.346 8.346 0 0 0-.398-.8.05.05 0 0 0-.05-.024 12.715 12.715 0 0 0-3.137.972.043.043 0 0 0-.02.018C5.343 10.048 4.793 12.958 5.063 15.83a.053.053 0 0 0 .02.036 12.837 12.837 0 0 0 3.858 1.95.048.048 0 0 0 .054-.018c.297-.405.561-.834.789-1.284a.05.05 0 0 0-.027-.068 8.61 8.61 0 0 1-1.205-.574.049.049 0 0 1-.005-.082c.08-.061.162-.124.24-.188a.048.048 0 0 1 .05-.006c2.528 1.154 5.266 1.154 7.766 0a.048.048 0 0 1 .05.006c.079.064.16.127.241.188a.049.049 0 0 1-.005.082c-.384.224-.785.416-1.206.574a.05.05 0 0 0-.026.068c.232.45.496.879.788 1.284a.048.048 0 0 0 .054.018 12.801 12.801 0 0 0 3.864-1.95.053.053 0 0 0 .02-.036c.32-3.317-.538-6.203-2.227-8.769a.042.042 0 0 0-.021-.018zM9.166 14.204c-.762 0-1.39-.7-1.39-1.56s.616-1.56 1.39-1.56c.78 0 1.402.707 1.39 1.56 0 .86-.617 1.56-1.39 1.56zm5.136 0c-.762 0-1.389-.7-1.389-1.56s.616-1.56 1.389-1.56c.78 0 1.403.707 1.39 1.56 0 .86-.61 1.56-1.39 1.56z" fill="#fff"/>
+                <svg viewBox="0 0 24 24" fill="#5865F2">
+                    <path d="M17.79 7.043a12.748 12.748 0 0 0-3.138-.972.047.047 0 0 0-.05.024c-.136.24-.286.554-.391.8a11.798 11.798 0 0 0-3.522 0 8.346 8.346 0 0 0-.398-.8.05.05 0 0 0-.05-.024 12.715 12.715 0 0 0-3.137.972.043.043 0 0 0-.02.018C5.343 10.048 4.793 12.958 5.063 15.83a.053.053 0 0 0 .02.036 12.837 12.837 0 0 0 3.858 1.95.048.048 0 0 0 .054-.018c.297-.405.561-.834.789-1.284a.05.05 0 0 0-.027-.068 8.61 8.61 0 0 1-1.205-.574.049.049 0 0 1-.005-.082c.08-.061.162-.124.24-.188a.048.048 0 0 1 .05-.006c2.528 1.154 5.266 1.154 7.766 0a.048.048 0 0 1 .05.006c.079.064.16.127.241.188a.049.049 0 0 1-.005.082c-.384.224-.785.416-1.206.574a.05.05 0 0 0-.026.068c.232.45.496.879.788 1.284a.048.048 0 0 0 .054.018 12.801 12.801 0 0 0 3.864-1.95.053.053 0 0 0 .02-.036c.32-3.317-.538-6.203-2.227-8.769a.042.042 0 0 0-.021-.018zM9.166 14.204c-.762 0-1.39-.7-1.39-1.56s.616-1.56 1.39-1.56c.78 0 1.402.707 1.39 1.56 0 .86-.617 1.56-1.39 1.56zm5.136 0c-.762 0-1.389-.7-1.389-1.56s.616-1.56 1.389-1.56c.78 0 1.403.707 1.39 1.56 0 .86-.61 1.56-1.39 1.56z"/>
+                </svg>
+            </a>
+            <!-- Telegram -->
+            <a href="" class="contact-btn">
+                <svg viewBox="0 0 24 24" fill="#229ED9">
+                    <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+            </a>
+            <!-- YouTube -->
+            <a href="" class="contact-btn">
+                <svg viewBox="0 0 24 24" fill="#FF0000">
+                    <path d="M21.582 6.186a2.5 2.5 0 0 0-1.763-1.763C18.25 4 12 4 12 4s-6.25 0-7.82.423A2.5 2.5 0 0 0 2.418 6.186C2 7.755 2 12 2 12s0 4.245.418 5.814a2.5 2.5 0 0 0 1.763 1.763C5.75 20 12 20 12 20s6.25 0 7.82-.423a2.5 2.5 0 0 0 1.763-1.763C22 16.245 22 12 22 12s0-4.245-.418-5.814zM9.916 15.116V8.884L15.416 12l-5.5 3.116z"/>
                 </svg>
             </a>
         </div>
@@ -819,53 +834,101 @@
 
             <!-- Nội dung Sub-tab: Game / Mod -->
             <div id="ios-game" class="sub-tab-content" style="display: block;">
-                <!-- Phần 1 -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="ASTUTECH OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+                
+                <!-- Thẻ Bài Đăng 1 -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" alt="ASTUTECH OB55 ANTIBAN IOS" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602738959483030/IMG_0500.png?ex=6ade3a07&is=6adce887&hm=bb226f0b6cae135b767db5c50866f3ff4c84ef60fbc40954f26f16159e7943da&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">ASTUTECH OB55 ANTIBAN IOS</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-desc">ASTUTECH OB55 ANTIBAN IOS</div>
-                <a href="https://byvn.net/4QYL" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/4QYL', '_blank'); event.stopPropagation();">
-                    Vượt Link Ngay
-                </a>
 
-                <div class="divider"></div>
-
-                <!-- Phần 2 -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="KIPAS OB55 ANTIBAN IOS" class="tab-main-image" onload="this.classList.add('loaded')">
+                <!-- Thẻ Bài Đăng 2 -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="KIPAS OB55 ANTIBAN IOS" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">KIPAS OB55 ANTIBAN IOS</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-desc">KIPAS OB55 ANTIBAN IOS</div>
-                <a href="https://byvn.net/70cK" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/70cK', '_blank'); event.stopPropagation();">
-                    Vượt Link Ngay
-                </a>
 
-                <div class="divider"></div>
-
-                <!-- Phần 3 -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563741933795545208/IMG_0512.jpg?ex=6adebba9&is=6add6a29&hm=dc8e139b43bd7c76b96e25b5a3b18a31301a570d4e085f2549cd170f724cef15&" alt="MIGUL OB55 IOS IPA" class="tab-main-image" onload="this.classList.add('loaded')">
-                </div>
-                <div class="image-desc">MIGUL OB55 IOS IPA</div>
-                <div class="btn-group">
-                    <a href="https://byvn.net/GFJt" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/GFJt', '_blank'); event.stopPropagation();">
-                        Vượt Link Ngay
-                    </a>
-                    <a href="https://byvn.net/PepW" target="_blank" class="btn-getkey ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/PepW', '_blank'); event.stopPropagation();">
-                        GetKey
-                    </a>
+                <!-- Thẻ Bài Đăng 3 -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563741933795545208/IMG_0512.jpg?ex=6adebba9&is=6add6a29&hm=dc8e139b43bd7c76b96e25b5a3b18a31301a570d4e085f2549cd170f724cef15&" alt="MIGUL OB55 IOS IPA" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563741933795545208/IMG_0512.jpg?ex=6adebba9&is=6add6a29&hm=dc8e139b43bd7c76b96e25b5a3b18a31301a570d4e085f2549cd170f724cef15&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">MIGUL OB55 IOS IPA</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                            <a href="" target="_blank" class="btn-getkey-new ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.65 10C11.83 7.67 9.61 6 7 6c-3.31 0-6 2.69-6 6s2.69 6 6 6c2.61 0 4.83-1.67 5.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+                                Get Key
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Nội dung Sub-tab: Ứng Dụng -->
             <div id="ios-app" class="sub-tab-content" style="display: none;">
-                <!-- TikTok Mod (iOS) -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT IPA" class="tab-main-image" onload="this.classList.add('loaded')">
+                <!-- Thẻ Bài Đăng TikTok (iOS) -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT IPA" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">TIKTOK MOD MỚI NHẤT IPA</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-desc">TIKTOK MOD MỚI NHẤT IPA</div>
-                <a href="https://byvn.net/gtC7" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/gtC7', '_blank'); event.stopPropagation();">
-                    Vượt Link Ngay
-                </a>
             </div>
 
             <div class="divider"></div>
@@ -900,48 +963,97 @@
 
             <!-- Nội dung Sub-tab: Game / Mod -->
             <div id="android-game" class="sub-tab-content" style="display: block;">
-                <!-- Phần 1 -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFTH" class="tab-main-image" onload="this.classList.add('loaded')">
-                </div>
-                <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFTH</div>
-                <a href="https://byvn.net/VpRU" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/VpRU', '_blank'); event.stopPropagation();">
-                    Vượt Link Ngay
-                </a>
-
-                <div class="divider"></div>
                 
-                <!-- Phần 2 -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602751701782528/IMG_0501.png?ex=6ade3a0a&is=6adce88a&hm=996f4cb647e8bd8e96273e61f4d3ba5da773ec564a7b42c233b4bc36b11eddac&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFM" class="tab-main-image" onload="this.classList.add('loaded')">
+                <!-- Thẻ Bài Đăng 1 -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFTH" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602764582486046/IMG_0502.png?ex=6ade3a0d&is=6adce88d&hm=3d429b8599e18361029e8f671893885db0e07f6ee4340398aa16db1777d62277&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">ASTUTECH OB55 ANTIBAN ANDROID FFTH</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-desc">ASTUTECH OB55 ANTIBAN ANDROID FFM</div>
-                <a href="https://byvn.net/00nO" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/00nO', '_blank'); event.stopPropagation();">
-                    Vượt Link Ngay
-                </a>
 
-                <div class="divider"></div>
-                
-                <!-- Phần 3 -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602816755302501/IMG_0506.png?ex=6ade3a19&is=6adce899&hm=a5c041983b546acefade7475e6605ea9789510f8a969dec06101bbea3cad1309&" alt="KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM" class="tab-main-image" onload="this.classList.add('loaded')">
+                <!-- Thẻ Bài Đăng 2 -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602751701782528/IMG_0501.png?ex=6ade3a0a&is=6adce88a&hm=996f4cb647e8bd8e96273e61f4d3ba5da773ec564a7b42c233b4bc36b11eddac&" alt="ASTUTECH OB55 ANTIBAN ANDROID FFM" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602751701782528/IMG_0501.png?ex=6ade3a0a&is=6adce88a&hm=996f4cb647e8bd8e96273e61f4d3ba5da773ec564a7b42c233b4bc36b11eddac&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">ASTUTECH OB55 ANTIBAN ANDROID FFM</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-desc">KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM</div>
-                <a href="https://byvn.net/Md8T" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://byvn.net/Md8T', '_blank'); event.stopPropagation();">
-                    Vượt Link Ngay
-                </a>
+
+                <!-- Thẻ Bài Đăng 3 -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602816755302501/IMG_0506.png?ex=6ade3a19&is=6adce899&hm=a5c041983b546acefade7475e6605ea9789510f8a969dec06101bbea3cad1309&" alt="KIPAS OB55 ANTIBAN ANDROID" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563602816755302501/IMG_0506.png?ex=6ade3a19&is=6adce899&hm=a5c041983b546acefade7475e6605ea9789510f8a969dec06101bbea3cad1309&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">KIPAS OB55 ANTIBAN ANDROID OB55 FFTH/FFM</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Nội dung Sub-tab: Ứng Dụng -->
             <div id="android-app" class="sub-tab-content" style="display: none;">
-                <!-- TikTok Mod (Android) -->
-                <div class="img-container">
-                    <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT ANDROID" class="tab-main-image" onload="this.classList.add('loaded')">
+                <!-- Thẻ Bài Đăng TikTok (Android) -->
+                <div class="post-card">
+                    <div class="img-container">
+                        <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" alt="TIKTOK MOD MỚI NHẤT ANDROID" class="tab-main-image">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <img src="https://cdn.discordapp.com/attachments/1509742092170170432/1563745398596575272/IMG_0513.jpg?ex=6adebee4&is=6add6d64&hm=75e3c01a38efbbc81ad7cdb92cdd1832a9ec56185536369d5e84bbae08069874&" class="post-icon" alt="Icon">
+                            <div class="post-title-group">
+                                <div class="post-title">TIKTOK MOD MỚI NHẤT ANDROID</div>
+                                <div class="post-date">Cập nhật ngày 20/10</div>
+                            </div>
+                        </div>
+                        <div class="btn-group">
+                            <a href="" target="_blank" class="btn-download ripple-btn" onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                Download
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="image-desc">TIKTOK MOD MỚI NHẤT ANDROID</div>
-                <a href="https://link4m.org/XA7UlELD" target="_blank" class="btn-big-link ripple-btn" onclick="event.preventDefault(); window.open('https://link4m.org/XA7UlELD', '_blank'); event.stopPropagation();">
-                    Vượt Link Ngay
-                </a>
             </div>
 
             <div class="divider"></div>
@@ -966,6 +1078,11 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- Footer Bản Quyền -->
+    <div class="footer">
+        &copy; Designer by Khuong Duy 2026
     </div>
 
     <!-- Nút Lên Đầu Trang -->
@@ -1008,7 +1125,7 @@
         });
 
         // --- Hiệu ứng gõ chữ ---
-        var text = "Website Tổng Hợp Mod, App, Tiện Ích";
+        var text = "and i'm a Youtuber";
         var element = document.getElementById("typewriter-text");
         var typeSpeed = 100, eraseSpeed = 50, delayBetween = 2000, i = 0, isDeleting = false;
 
@@ -1326,4 +1443,3 @@
 
 </body>
 </html>
-```
