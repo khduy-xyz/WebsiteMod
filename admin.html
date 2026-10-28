@@ -1,0 +1,224 @@
+<!-- LƯU FILE NÀY VỚI TÊN: admin.html (Để cùng thư mục với index.html) -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Khuong Duy</title>
+    <style>
+        :root {
+            --bg: #0f0f1a;
+            --panel-bg: #1a1a2e;
+            --text: #fff;
+            --text-muted: #a0a0b0;
+            --border: #2a2a3e;
+            --primary: #3b82f6;
+            --danger: #ef4444;
+            --success: #22c55e;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, sans-serif; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        .header h1 { font-size: 1.5rem; color: var(--primary); }
+        .btn-logout {
+            background: var(--danger); color: #fff; border: none;
+            padding: 8px 16px; border-radius: 8px; font-weight: bold; cursor: pointer;
+        }
+
+        /* Form Upload */
+        .upload-section {
+            background: var(--panel-bg);
+            padding: 20px; border-radius: 12px; border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        .upload-section h2 { font-size: 1.2rem; margin-bottom: 15px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+            background: var(--bg); color: var(--text); outline: none;
+        }
+        .btn-submit {
+            background: var(--success); color: #fff; border: none;
+            padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;
+            width: 100%; margin-top: 10px;
+        }
+
+        /* Danh sách Mod */
+        .mods-section h2 { font-size: 1.2rem; margin-bottom: 15px; }
+        .mod-list {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;
+        }
+        .mod-item {
+            background: var(--panel-bg); border: 1px solid var(--border);
+            border-radius: 12px; padding: 15px; position: relative;
+            display: flex; gap: 15px; align-items: flex-start;
+        }
+        .mod-item img {
+            width: 80px; height: 80px; border-radius: 8px; object-fit: cover; background: #000;
+        }
+        .mod-info { flex: 1; }
+        .mod-info h3 { font-size: 1rem; margin-bottom: 5px; text-transform: uppercase; }
+        .mod-info p { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 3px; word-break: break-all; }
+        .mod-info .link { color: var(--primary); text-decoration: none; font-size: 0.8rem; }
+        .btn-delete {
+            background: var(--danger); color: #fff; border: none;
+            padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;
+            position: absolute; top: 15px; right: 15px;
+        }
+        
+        .empty-text { color: var(--text-muted); font-style: italic; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Trang Quản Trị Hệ Thống</h1>
+        <button class="btn-logout" onclick="logout()">Đăng Xuất</button>
+    </div>
+
+    <div class="upload-section">
+        <h2>Thêm Mod / Bài Đăng Mới</h2>
+        
+        <div class="form-group">
+            <label>Tên Mod / Bài đăng</label>
+            <input type="text" id="upTitle" placeholder="VD: ASTUTECH OB55 ANTIBAN IOS">
+        </div>
+        
+        <div class="form-group">
+            <label>Link Tải (Download/GetKey)</label>
+            <input type="text" id="upLink" placeholder="VD: https://1short.link/l/...">
+        </div>
+        
+        <div class="form-group">
+            <label>Nền tảng</label>
+            <select id="upPlatform">
+                <option value="ios">iOS</option>
+                <option value="android">Android</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>Hình Ảnh (Chọn từ máy)</label>
+            <input type="file" id="upImage" accept="image/*">
+        </div>
+
+        <button class="btn-submit" onclick="uploadMod()">Upload Bài Đăng Lên Web</button>
+    </div>
+
+    <div class="mods-section">
+        <h2>Danh Sách Các Mod Đã Up</h2>
+        <div class="mod-list" id="modList">
+            <!-- Render bằng JS -->
+        </div>
+    </div>
+
+    <script>
+        // 1. Bảo mật: Kiểm tra xem có phải Owner không
+        if (localStorage.getItem('isOwner') !== 'true') {
+            alert('Bạn không có quyền truy cập trang này!');
+            window.location.href = 'index.html';
+        }
+
+        // 2. Hàm Đăng xuất
+        function logout() {
+            localStorage.removeItem('isOwner');
+            window.location.href = 'index.html';
+        }
+
+        // 3. Load danh sách mod
+        function loadMods() {
+            const modList = document.getElementById('modList');
+            const savedMods = JSON.parse(localStorage.getItem('customMods') || '[]');
+
+            if (savedMods.length === 0) {
+                modList.innerHTML = '<p class="empty-text">Chưa có mod nào được up lên.</p>';
+                return;
+            }
+
+            modList.innerHTML = '';
+            savedMods.forEach(mod => {
+                const card = document.createElement('div');
+                card.className = 'mod-item';
+                card.innerHTML = `
+                    <img src="${mod.image}" alt="img">
+                    <div class="mod-info">
+                        <h3>${mod.title}</h3>
+                        <p>Nền tảng: <b>${mod.platform.toUpperCase()}</b></p>
+                        <p>Ngày: ${mod.date}</p>
+                        <a href="${mod.link}" target="_blank" class="link">🔗 Link tải</a>
+                    </div>
+                    <button class="btn-delete" onclick="deleteMod(${mod.id})">Xóa</button>
+                `;
+                modList.appendChild(card);
+            });
+        }
+
+        // 4. Hàm Upload Mod
+        function uploadMod() {
+            const title = document.getElementById('upTitle').value.trim();
+            const link = document.getElementById('upLink').value.trim();
+            const platform = document.getElementById('upPlatform').value;
+            const imageFile = document.getElementById('upImage').files[0];
+
+            if (!title || !link || !imageFile) {
+                alert('Vui lòng nhập đủ Tên, Link và chọn Ảnh!');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageBase64 = e.target.result;
+                
+                let customMods = JSON.parse(localStorage.getItem('customMods') || '[]');
+                customMods.push({
+                    id: Date.now(),
+                    title: title.toUpperCase(),
+                    link: link,
+                    platform: platform,
+                    image: imageBase64,
+                    date: new Date().toLocaleDateString('vi-VN')
+                });
+                localStorage.setItem('customMods', JSON.stringify(customMods));
+
+                // Reset form
+                document.getElementById('upTitle').value = '';
+                document.getElementById('upLink').value = '';
+                document.getElementById('upImage').value = '';
+                
+                alert('Up bài thành công!');
+                loadMods(); // Load lại danh sách
+            };
+            reader.readAsDataURL(imageFile);
+        }
+
+        // 5. Hàm Xóa Mod
+        function deleteMod(id) {
+            if (!confirm('Bạn có chắc chắn muốn xóa bài đăng này không?')) return;
+
+            let customMods = JSON.parse(localStorage.getItem('customMods') || '[]');
+            customMods = customMods.filter(mod => mod.id !== id);
+            localStorage.setItem('customMods', JSON.stringify(customMods));
+            
+            loadMods(); // Load lại danh sách
+        }
+
+        // Chạy khi mở trang
+        loadMods();
+    </script>
+
+</body>
+</html>
