@@ -372,6 +372,7 @@ section { padding:20px 5% 80px; }
   justify-content: center; 
   gap: 6px;
   box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+  text-decoration: none;
 }
 .btn-dl-new:hover {
   transform: translateY(-2px);
@@ -647,7 +648,7 @@ const products = [
     platform: "android", type: "game",
     image2: "https://copium.pics/h2LZMrA8.webp",
     image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.org/Rj0HgxLw" // <-- Đã thêm link
+    downloadLink: "https://link4m.org/Rj0HgxLw" 
   },
   { 
     id: 6, 
@@ -658,7 +659,7 @@ const products = [
     platform: "android", type: "game",
     image2: "https://copium.pics/ss6kTY2F.webp",
     image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.net/7ZBhf" // <-- Đã thêm link
+    downloadLink: "https://link4m.net/7ZBhf" 
   },
   { 
     id: 7, 
@@ -669,7 +670,7 @@ const products = [
     platform: "android", type: "game",
     image2: "https://copium.pics/fTPM8Ekx.webp",
     image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.net/TnS8qM" // <-- Đã thêm link
+    downloadLink: "https://link4m.net/TnS8qM" 
   },
 
   // ================== ANDROID - ỨNG DỤNG ==================
@@ -682,7 +683,7 @@ const products = [
     platform: "android", type: "app",
     image2: "https://copium.pics/gWaraSWA.jpg",
     image1: "https://copium.pics/ALVncDmA.webp", 
-    downloadLink: "https://link4m.org/n4ama" // <-- Đã thêm link
+    downloadLink: "https://link4m.org/n4ama" 
   },
 ];
 
@@ -708,10 +709,24 @@ function renderProducts() {
   }
   
   grid.innerHTML = list.map((p, i) => {
-    // Kiểm tra xem mod có bật nút GetKey không
+    // Nút GetKey
     const getKeyBtn = p.hasGetKey 
       ? `<button class="btn-getkey" onclick="getKey(${p.id})">GetKey</button>` 
       : '';
+
+    // Nút Tải xuống: Dùng thẻ <a> thay vì window.open để tránh bị chặn popup
+    let downloadBtn = '';
+    if (p.downloadLink && p.downloadLink.trim() !== "") {
+      downloadBtn = `<a href="${p.downloadLink}" target="_blank" class="btn-dl-new">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Tải Xuống
+        </a>`;
+    } else {
+      downloadBtn = `<button onclick="showToast('⏳ Đang cập nhật!')" class="btn-dl-new">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Tải Xuống
+        </button>`;
+    }
 
     return `
     <div class="card" style="animation:fadeUp .5s ${i*0.05}s both;">
@@ -734,10 +749,7 @@ function renderProducts() {
         ${p.date ? `<p class="card-date">${p.date}</p>` : ''}
         
         <div class="card-actions">
-          <button class="btn-dl-new" onclick="download(${p.id})">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            Tải Xuống
-          </button>
+          ${downloadBtn}
           ${getKeyBtn}
         </div>
       </div>
@@ -764,20 +776,6 @@ document.getElementById("type-filter").addEventListener("click", e => {
   renderProducts();
 });
 
-function download(id) {
-  const product = products.find(p => p.id === id);
-  if (!product) return;
-  
-  if (product.downloadLink && product.downloadLink.trim() !== "") {
-    showToast(`⏳ Đang mở link rút gọn... Nhớ vượt qua 5-6 link quảng cáo để lấy file nhé!`);
-    setTimeout(() => {
-      window.open(product.downloadLink, "_blank");
-    }, 1500);
-  } else {
-    showToast(`⏳ ${product.name} đang được cập nhật!`);
-  }
-}
-
 // Hàm xử lý khi bấm nút GetKey
 function getKey(id) {
   const product = products.find(p => p.id === id);
@@ -792,7 +790,7 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add("show");
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), 4000);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
 }
 
 window.addEventListener("scroll", () => {
