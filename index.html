@@ -3,813 +3,346 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KHUONG DUY — Mod & Hack Game Premium</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Khuong Duy</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
 :root {
-  --bg:#08080d;
-  --bg-2:#0e0e17;
-  --card:#14141f;
-  --border:#23233a;
-  --primary:#00ff88;
-  --secondary:#ff006e;
-  --accent:#00d4ff;
-  --gold:#ffd700;
-  --text:#eaeaf5;
-  --dim:#7a7a90;
-  --grad:linear-gradient(135deg,#00ff88,#00d4ff,#ff006e);
+  --bg-main: #f8f9fa;
+  --bg-card: #ffffff;
+  --text-main: #333333;
+  --text-muted: #777777;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0,0,0,0.08);
+  --nav-bg: rgba(255,255,255,0.9);
+  --btn-primary: #1e1e1e;
+  --btn-text: #fff;
+  --btn-sub: #f1f1f1;
+  --btn-sub-text: #333;
 }
 
-html { scroll-behavior:smooth; }
+body.vthangios-dark {
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --shadow-color: rgba(0,0,0,0.3);
+  --nav-bg: rgba(15,23,42,0.9);
+  --btn-primary: #3b82f6;
+  --btn-text: #fff;
+  --btn-sub: #334155;
+  --btn-sub-text: #fff;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Quicksand', sans-serif; -webkit-tap-highlight-color: transparent; }
+
 body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Rajdhani',sans-serif;
-  overflow-x:hidden;
-  line-height:1.6;
-}
-
-body::before {
-  content:'';
-  position:fixed; inset:0; z-index:-1;
-  background-image:
-    linear-gradient(rgba(0,255,136,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,255,136,0.03) 1px,transparent 1px);
-  background-size:50px 50px;
-  mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%);
-}
-
-/* ========== HEADER ========== */
-.header {
-  position:sticky; top:0; z-index:100;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:16px 5%;
-  background:rgba(8,8,13,0.85);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-}
-.logo {
-  font-family:'Orbitron',sans-serif;
-  font-size:1.5rem; font-weight:900;
-  display:flex; align-items:center; gap:10px;
-  letter-spacing:1px;
-}
-.logo-img {
-  width: 34px; height: 34px;
-  border-radius: 10px; object-fit: cover;
-  box-shadow: 0 0 15px rgba(0, 255, 136, 0.4);
+  background: var(--bg-main);
+  color: var(--text-main);
   transition: all 0.3s ease;
-}
-.logo:hover .logo-img {
-  box-shadow: 0 0 25px rgba(255, 0, 110, 0.6);
-  transform: scale(1.05);
-}
-.brand-name {
-  background:var(--grad);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:grad-move 4s linear infinite;
-}
-@keyframes grad-move {
-  0%,100% { background-position:0% 50%; }
-  50% { background-position:100% 50%; }
-}
-.nav { display:flex; gap:28px; }
-.nav a {
-  color:var(--dim); text-decoration:none; font-weight:600;
-  font-size:1rem; position:relative;
-  transition:color .2s;
-}
-.nav a::after {
-  content:''; position:absolute; bottom:-4px; left:0;
-  width:0; height:2px; background:var(--primary);
-  transition:width .3s; box-shadow:0 0 8px var(--primary);
-}
-.nav a:hover { color:var(--primary); }
-.nav a:hover::after { width:100%; }
-
-/* ========== HERO ========== */
-.hero {
-  position:relative;
-  min-height:35vh;
-  display:flex; align-items:center; justify-content:center;
-  padding:60px 5% 20px;
-  text-align:center;
-}
-.hero-glow {
-  position:absolute; inset:0;
-  background:
-    radial-gradient(circle at 50% 40%,rgba(0,255,136,0.14),transparent 55%),
-    radial-gradient(circle at 15% 85%,rgba(255,0,110,0.1),transparent 50%),
-    radial-gradient(circle at 85% 15%,rgba(0,212,255,0.1),transparent 50%);
-  pointer-events:none;
-}
-.hero-content { position:relative; z-index:2; max-width:960px; }
-.hero-badge {
-  display:inline-flex; align-items:center; gap:8px;
-  padding:6px 16px;
-  background:rgba(0,255,136,0.08);
-  border:1px solid rgba(0,255,136,0.3);
-  border-radius:30px;
-  font-size:.85rem; font-weight:600;
-  color:var(--primary); margin-bottom:20px;
-}
-.hero-badge .dot {
-  width:6px; height:6px; border-radius:50%;
-  background:var(--primary);
-  box-shadow:0 0 10px var(--primary);
-  animation:pulse 1.5s infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; transform:scale(1); }
-  50% { opacity:.5; transform:scale(1.3); }
-}
-.hero h1 {
-  font-family:'Orbitron',sans-serif;
-  font-size:clamp(2rem,5vw,4rem);
-  font-weight:900; line-height:1.05;
-  letter-spacing:2px;
-}
-.hero h1 .line2 {
-  background:var(--grad);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:grad-move 3s linear infinite;
-  display:inline-block;
+  padding-bottom: 50px;
 }
 
-/* ========== SECTION ========== */
-section { padding:20px 5% 80px; }
-.section-head { text-align:center; margin-bottom:20px; }
-.accent { color:var(--primary); }
-
-/* ========== BỘ LỌC ========== */
-.filter-container {
-  max-width: 600px;
-  margin: 0 auto 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+/* NAV */
+.vthangios-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: flex-end; gap: 10px;
+  padding: 15px 20px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
 }
-.platform-row {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-.platform-btn {
-  flex: 1;
-  max-width: 280px;
-  padding: 10px 16px;
-  background: transparent;
-  border: 1.5px solid #2d2645;
-  border-radius: 10px;
-  color: #a09ab8;
-  font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  transition: all .3s;
-}
-.platform-btn .icon { font-size: 1.1rem; }
-.platform-btn .icon-img { width: 20px; height: 20px; object-fit: contain; transition: transform 0.3s ease; }
-.platform-btn.active .icon-img { transform: scale(1.1); }
-.platform-btn.active {
-  background: #3b82f6;
-  border-color: #3b82f6;
-  color: #fff;
-  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-}
-.platform-btn:hover:not(.active) {
-  border-color: #4b4270;
-  color: #eaeaf5;
-}
-
-.type-row {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-.type-btn {
-  flex: 1;
-  max-width: 280px;
-  padding: 8px 16px;
-  background: transparent;
-  border: 1.5px solid #2d2645;
-  border-radius: 8px;
-  color: #a09ab8;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all .3s;
-}
-.type-btn.active {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: #3b82f6;
-  color: #3b82f6;
-}
-.type-btn:hover:not(.active) {
-  border-color: #4b4270;
-  color: #eaeaf5;
-}
-
-/* ========== CẢNH BÁO VƯỢT LINK ========== */
-.warning-box {
-  max-width: 600px;
-  margin: 0 auto 24px;
-  background: rgba(255, 0, 110, 0.05);
-  border: 1px solid rgba(255, 0, 110, 0.2);
-  border-left: 3px solid var(--secondary);
-  border-radius: 8px;
-  padding: 12px 16px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-.warning-icon { font-size: 1.2rem; flex-shrink: 0; }
-.warning-text h4 {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.85rem; color: var(--secondary);
-  margin-bottom: 4px; letter-spacing: 0.5px;
-}
-.warning-text p { color: var(--text); font-size: 0.85rem; line-height: 1.5; opacity: 0.85; }
-.warning-text p strong { color: var(--secondary); font-weight: 700; }
-
-/* ========== PRODUCT GRID ========== */
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-  gap:24px;
-  max-width:1280px;
-  margin:0 auto;
-}
-
-.card {
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  overflow:hidden;
-  transition:all .35s;
-  position:relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.card:hover {
-  transform:translateY(-8px);
-  border-color:rgba(139, 92, 246, 0.6);
-  box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 40px rgba(139, 92, 246, 0.15);
-}
-
-/* ẢNH 2 (Hiển thị full ảnh, không bị cắt) */
-.card-cover {
-  height: 200px;
-  width: 100%;
-  position: relative;
-  background: #0e0e17; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.card-cover img {
-  width: 100%; 
-  height: 100%;
-  object-fit: contain; 
-  display: block;
-}
-
-.card-badge {
-  position:absolute; top:12px; right:12px;
-  padding:4px 12px;
-  font-size:.75rem; font-weight:800;
-  border-radius:6px; letter-spacing:1px;
-  z-index:3;
-}
-.badge-hot { background:var(--secondary); color:#fff; box-shadow:0 0 15px var(--secondary); animation:pulse 2s infinite; }
-.badge-new { background:var(--primary); color:#000; box-shadow:0 0 15px rgba(0,255,136,0.5); }
-.badge-free { background:var(--accent); color:#000; }
-.badge-vip { background:var(--gold); color:#000; box-shadow:0 0 15px rgba(255,215,0,0.5); }
-
-/* KHỐI THÔNG TIN VÀ ẢNH 1 */
-.card-info-container {
-  position: relative;
-  padding: 32px 20px 20px; 
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ẢNH 1 (Icon nhỏ) */
-.card-icon {
-  position: absolute;
-  top: -40px; 
-  left: 20px;
-  width: 80px;
-  height: 80px;
-  border-radius: 16px;
-  border: 3px solid var(--card); 
-  background: var(--bg-2);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-  z-index: 10;
-  overflow: hidden;
-}
-.card-icon img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-
-/* Tên Mod hiển thị full */
-.card-title {
-  font-family:'Orbitron',sans-serif;
-  font-size:1.1rem; 
-  margin-bottom:6px;
-  letter-spacing:.5px;
-  white-space: normal; 
-  word-wrap: break-word;
-  line-height: 1.4;
-}
-
-/* Dòng ngày tháng cập nhật */
-.card-date {
-  color:var(--dim); 
-  font-size:0.9rem;
-  margin-bottom:16px;
-  font-style: italic;
-  display: block;
-}
-
-/* KHUNG CHỨA 2 NÚT (Tải xuống & GetKey) */
-.card-actions {
-  margin-top: auto; 
-  display: flex;
-  gap: 10px;
-}
-
-/* Nút Download */
-.btn-dl-new {
-  flex: 1; 
-  padding: 14px;
-  background: linear-gradient(90deg, #6366f1, #a855f7); 
-  border: none;
-  color: #fff;
-  border-radius: 50px; 
-  cursor: pointer;
-  font-family: inherit; 
-  font-weight: 700; 
-  font-size: 1.05rem;
-  transition: all .3s;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 6px;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-  text-decoration: none;
-}
-.btn-dl-new:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
-  filter: brightness(1.1);
-}
-
-/* Nút GetKey */
-.btn-getkey {
-  flex: 1; 
-  padding: 14px;
-  background: linear-gradient(90deg, #06b6d4, #3b82f6); 
-  border: none;
-  color: #fff;
-  border-radius: 50px; 
-  cursor: pointer;
-  font-family: inherit; 
-  font-weight: 700; 
-  font-size: 1.05rem;
-  transition: all .3s;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 6px;
-  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
-}
-.btn-getkey:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.6);
-  filter: brightness(1.1);
-}
-
-.empty {
-  grid-column:1 / -1;
-  text-align:center;
-  padding:60px 20px;
-  color:var(--dim);
-}
-.empty-icon { font-size:4rem; margin-bottom:16px; opacity:.5; }
-
-/* ========== SOCIAL LINKS ========== */
-.social-section {
-  padding: 40px 5% 80px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.social-btn {
-  width: 80px; height: 80px;
-  background: #161322;
-  border: 1px solid #2d2645;
-  border-radius: 24px;
+.vthangios-bell-btn, .vthangios-theme-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  color: var(--text-main); font-size: 1.1rem;
   display: flex; align-items: center; justify-content: center;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  cursor: pointer; box-shadow: 0 2px 10px var(--shadow-color);
 }
-.social-btn svg { width: 36px; height: 36px; transition: transform 0.3s ease; }
-.social-btn:hover { transform: translateY(-5px); border-color: #4b4270; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.social-btn:hover svg { transform: scale(1.1); }
-.social-btn.discord svg { fill: #5865F2; }
-.social-btn.telegram svg { fill: #2AABEE; }
-.social-btn.youtube svg { fill: #FF0000; }
 
-/* ========== FOOTER ========== */
-footer {
-  padding:40px 5% 30px;
-  text-align:center;
-  border-top:1px solid var(--border);
-  color:var(--dim);
-}
-footer .logo { justify-content:center; margin-bottom:16px; }
-footer p { font-size:.9rem; }
+/* MAIN LAYOUT */
+main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; }
 
-/* ========== TOAST ========== */
-.toast {
-  position:fixed; bottom:30px; left:50%;
-  transform:translateX(-50%) translateY(100px);
-  background:var(--card);
-  border:1px solid var(--primary);
-  color:var(--text);
-  padding:12px 24px;
-  border-radius:10px;
-  font-weight:600;
-  font-size: 0.95rem;
-  box-shadow:0 10px 40px rgba(0,255,136,0.3);
-  z-index:1000;
-  transition:transform .4s cubic-bezier(0.68,-0.55,0.265,1.55);
-  opacity:0; max-width:90vw;
-  text-align: center;
+/* AVATAR */
+.vthangios-avatar-wrap {
+  position: relative; width: 130px; height: 130px;
+  margin: 0 auto 15px;
+  background: var(--border-color);
+  border-radius: 50%;
 }
-.toast.show { transform:translateX(-50%) translateY(0); opacity:1; }
+.vthangios-avatar {
+  width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+  border: 4px solid var(--bg-card); box-shadow: 0 4px 15px var(--shadow-color);
+  position: relative; z-index: 2;
+}
+.vthangios-avatar-frame {
+  position: absolute; top: -8px; left: -8px; width: calc(100% + 16px); height: calc(100% + 16px);
+  z-index: 1; border-radius: 50%; border: 2px dashed var(--btn-primary);
+  animation: spin 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* ========== RESPONSIVE ========== */
-@media (max-width:900px) {
-  .nav { display:none; }
-}
-@media (max-width:600px) {
-  section { padding:20px 4% 60px; }
-  .logo { font-size:1.2rem; gap: 8px; }
-  .logo-img { width:30px; height:30px; } 
-  
-  .platform-row, .type-row { flex-direction: row; }
-  .platform-btn { padding: 8px 10px; font-size: 0.85rem; }
-  .type-btn { padding: 6px 10px; font-size: 0.8rem; }
-  .platform-btn .icon-img { width: 16px; height: 16px; }
-  
-  .social-btn { width: 70px; height: 70px; border-radius: 20px; }
-  .social-btn svg { width: 32px; height: 32px; }
+/* PROFILE INFO */
+.vthangios-iam { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; margin-bottom: 5px; }
 
-  .card-cover { height: 180px; }
-  .card-icon { width: 70px; height: 70px; top: -35px; left: 16px; border-radius: 14px; }
-  .card-info-container { padding: 28px 16px 16px; }
-  .card-title { font-size: 1rem; }
-  
-  .btn-dl-new, .btn-getkey { padding: 12px; font-size: 0.95rem; }
+/* HIỆU ỨNG NEON ĐỔI MÀU CHO TÊN */
+.vthangios-name {
+  font-size: 1.7rem; font-weight: 800; margin: 5px 0 20px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
 }
+.neon-text {
+  background: linear-gradient(90deg, #ff007f, #ff8c00, #ffd700, #00ff00, #00ffff, #007bff, #8a2be2, #ff007f);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neon-flow 4s linear infinite;
+  filter: drop-shadow(0 0 5px rgba(255, 0, 127, 0.4));
+}
+@keyframes neon-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* SOCIALS */
+.vthangios-socials { display: flex; justify-content: center; gap: 15px; margin: 25px 0 30px; }
+.vthangios-social-item { transition: transform 0.2s; }
+.vthangios-social-item:hover { transform: translateY(-5px) scale(1.1); }
+
+/* APP LIST */
+.vthangios-app-section { padding: 0 20px; text-align: left; }
+
+.vthangios-app-entry {
+  margin-bottom: 25px; background: var(--bg-card); border-radius: 20px;
+  box-shadow: 0 4px 15px var(--shadow-color); overflow: hidden;
+  border: 1px solid var(--border-color); transition: transform 0.3s;
+}
+.vthangios-app-entry:hover { transform: translateY(-3px); }
+
+.vthangios-app-banner { width: 100%; height: 200px; position: relative; background: var(--border-color); display: flex; align-items: center; justify-content: center; }
+.vthangios-app-banner img { width: 100%; height: 100%; object-fit: cover; }
+.vthangios-app-banner-badges { position: absolute; top: 12px; left: 12px; display: flex; gap: 8px; }
+.vthangios-platform-badge {
+  background: rgba(0,0,0,0.7); color: #fff; padding: 5px 12px;
+  border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+  backdrop-filter: blur(5px); display: flex; align-items: center; gap: 5px;
+}
+
+.vthangios-app-info { padding: 20px; position: relative; }
+.vthangios-app-icon-wrap {
+  position: absolute; top: -45px; left: 20px;
+  width: 80px; height: 80px; border-radius: 18px; background: var(--bg-card);
+  border: 3px solid var(--bg-card); box-shadow: 0 5px 15px var(--shadow-color);
+  overflow: hidden; z-index: 2;
+}
+.vthangios-app-icon-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+.vthangios-app-name { display: block; font-size: 1.15rem; font-weight: 800; margin-top: 20px; margin-bottom: 4px; }
+.vthangios-app-desc { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
+
+/* KHUNG CHỨA NÚT */
+.vthangios-app-actions { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px; 
+  margin-top: 15px; 
+}
+.vthangios-app-actions button, .vthangios-app-actions a {
+  width: 100%; 
+  padding: 12px 10px; border-radius: 12px;
+  font-size: 0.95rem; font-weight: 700; display: flex; align-items: center;
+  justify-content: center; gap: 8px; text-decoration: none; cursor: pointer;
+  transition: all 0.2s; border: none;
+}
+
+/* Nút Download (Màu Xanh Dương) */
+.vthangios-download-btn {
+  background: var(--btn-primary); color: var(--btn-text);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+.vthangios-download-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+/* Nút Unlock ID (Màu Xám/Nhạt) */
+.vthangios-app-getkey.is-main { background: var(--btn-sub); color: var(--btn-sub-text); }
+.vthangios-app-getkey:hover { opacity: 0.8; transform: translateY(-2px); }
+
+/* Nút FFARIS Dash (Màu Xanh Lá) */
+.btn-dash {
+  background: #10b981; color: #fff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+.btn-dash:hover { opacity: 0.9; transform: translateY(-2px); }
+
+/* FOOTER */
+.vthangios-footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); padding: 30px 20px; border-top: 1px solid var(--border-color); margin-top: 40px; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="logo">
-    <img src="https://copium.pics/Y2G7JHQe.jpg" alt="Khuong Duy Logo" class="logo-img">
-    <span class="brand-name">KHUONG DUY</span>
-  </div>
-  <nav class="nav">
-    <a href="#home">Trang Chủ</a>
-    <a href="#products">Kho Mod</a>
-    <a href="#social">Liên Hệ</a>
+<script>
+  (function(){
+    var t=null;
+    try{ t=localStorage.getItem('vthangios_theme_v2') }catch(e){}
+    if(t==='dark') {
+      document.body.classList.add('vthangios-dark');
+    }
+  })();
+</script>
+
+<main role="main">
+  <!-- NAV -->
+  <nav class="vthangios-nav" aria-label="Điều hướng chính">
+    <button class="vthangios-bell-btn" aria-label="Thông báo">
+      <i class="fas fa-bell"></i>
+    </button>
+    <button class="vthangios-theme-btn" onclick="vtToggleTheme()" aria-label="Chuyển chế độ">
+      <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
   </nav>
-</header>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <div class="hero-badge">
-      <span class="dot"></span> Cập nhật mod mới mỗi ngày
-    </div>
-    <h1>
-      MOD & HACK GAME<br>
-      <span class="line2">PREMIUM 2026</span>
-    </h1>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section id="products" style="padding-top: 0;">
-  
-  <!-- CẢNH BÁO VƯỢT LINK -->
-  <div class="warning-box">
-    <div class="warning-icon">🛑</div>
-    <div class="warning-text">
-      <h4>LƯU Ý QUAN TRỌNG</h4>
-      <p>Thực lòng tụi mình cũng không muốn làm khó các bạn. Nhưng để duy trì server, đành phải nhờ các bạn bấm vượt qua <strong>5 - 6 link</strong> quảng cáo rồi mới hiện link tải file. Thông cảm giúp tụi mình nha, đừng chửi tội nghiệp 🥺. Cảm ơn!</p>
-    </div>
+  <!-- AVATAR -->
+  <div class="vthangios-avatar-wrap has-frame">
+    <img class="vthangios-avatar" src="https://copium.pics/4qjepM2C.jpg" alt="Khuong Duy">
+    <div class="vthangios-avatar-frame"></div>
   </div>
 
-  <!-- BỘ LỌC -->
-  <div class="filter-container">
-    <div class="platform-row" id="platform-filter">
-      <button class="platform-btn active" data-platform="ios">
-        <span class="icon"></span> iOS
-      </button>
-      <button class="platform-btn" data-platform="android">
-        <img src="https://copium.pics/fpxdpsBu.webp" alt="Android" class="icon-img"> Android
-      </button>
-    </div>
-    
-    <div class="type-row" id="type-filter">
-      <button class="type-btn active" data-type="game">
-        Game / Mod
-      </button>
-      <button class="type-btn" data-type="app">
-        Ứng Dụng
-      </button>
-    </div>
+  <!-- NAME -->
+  <p class="vthangios-iam">Hi, i am</p>
+  <h1 class="vthangios-name">
+    <span class="neon-text">Khuong Duy</span>
+    <i class="fas fa-check-circle" style="color: #3b82f6; font-size: 1.3rem;"></i>
+  </h1>
+
+  <!-- SOCIALS -->
+  <div class="vthangios-socials">
+    <a href="https://discord.gg/7t3P5zpu" class="vthangios-social-item" target="_blank">
+      <i class="fa-brands fa-discord" style="color:#5865F2; font-size: 45px;"></i>
+    </a>
+    <a href="https://t.me/khduylato" class="vthangios-social-item" target="_blank">
+      <i class="fa-brands fa-telegram" style="color:#2AABEE; font-size: 45px;"></i>
+    </a>
+    <a href="https://www.youtube.com/@khuongduylato" class="vthangios-social-item" target="_blank">
+      <i class="fa-brands fa-youtube" style="color:#FF0000; font-size: 45px;"></i>
+    </a>
   </div>
 
-  <div class="grid" id="grid"></div>
-</section>
+  <!-- APP SECTION -->
+  <section class="vthangios-app-section" aria-label="Danh sách ứng dụng">
+    <div class="vthangios-group-block" id="app-list">
+      <!-- App sẽ render ở đây -->
+    </div>
+  </section>
 
-<!-- SOCIAL LINKS -->
-<section class="social-section" id="social">
-  <a href="https://discord.gg/7t3P5zpu" target="_blank" class="social-btn discord">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
-    </svg>
-  </a>
-  <a href="https://t.me/khduylato" target="_blank" class="social-btn telegram">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-    </svg>
-  </a>
-  <a href="https://www.youtube.com/@khuongduylato" target="_blank" class="social-btn youtube">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-    </svg>
-  </a>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="logo">
-    <img src="https://copium.pics/Y2G7JHQe.jpg" alt="Khuong Duy Logo" class="logo-img">
-    <span class="brand-name">KHUONG DUY</span>
-  </div>
-  <p>© 2026 KHUONG DUY — Made with ⚡ by Gamers, for Gamers</p>
-</footer>
-
-<div class="toast" id="toast"></div>
+  <!-- FOOTER -->
+  <footer class="vthangios-footer">
+    &copy; Designer by Khuong Duy 2026
+  </footer>
+</main>
 
 <script>
-const products = [
-  // ================== iOS - GAME / MOD ==================
+/* ================================================================
+   DỮ LIỆU APP (MÀY ĐIỀN VÀO ĐÂY)
+================================================================ */
+const apps = [
   { 
-    id: 1, 
-    name: "MENU MIGUL OB55 UPDATE", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "ios", type: "game",
-    image2: "https://copium.pics/7yRH24uc.jpg",
-    image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "",
-    hasGetKey: true 
-  },
-  { 
-    id: 2, 
-    name: "ASTUTECH OB55 ANTIBAN MỚI NHẤT", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "ios", type: "game",
-    image2: "https://copium.pics/ExwApYyy.jpg",
-    image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.org/ntbYb5"
-  },
-  { 
-    id: 3, 
-    name: "KIPAS OB55 ANTIBAN MỚI NHẤT", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "ios", type: "game",
-    image2: "https://copium.pics/ED2PzGM2.webp", 
-    image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.org/LuAsq1" 
-  },
-
-  // ================== iOS - ỨNG DỤNG ==================
-  { 
-    id: 4, 
-    name: "TIKTOK MOD IOS UPDATE", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "ios", type: "app",
-    image2: "https://copium.pics/gWaraSWA.jpg",
-    image1: "https://copium.pics/ALVncDmA.webp", 
-    downloadLink: "https://link4m.org/8pJ2Yl" 
-  },
-
-  // ================== ANDROID - GAME / MOD ==================
-  { 
-    id: 5, 
-    name: "ASTUTECH OB55 FFTH ANTIBAN MỚI NHẤT", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "android", type: "game",
-    image2: "https://copium.pics/h2LZMrA8.webp",
-    image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.org/Rj0HgxLw" 
-  },
-  { 
-    id: 6, 
-    name: "ASTUTECH OB55 FFM ANTIBAN MỚI NHẤT", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "android", type: "game",
-    image2: "https://copium.pics/ss6kTY2F.webp",
-    image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.net/7ZBhf" 
-  },
-  { 
-    id: 7, 
-    name: "KIPAS OB55 ANTIBAN UPDATE", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "android", type: "game",
-    image2: "https://copium.pics/fTPM8Ekx.webp",
-    image1: "https://copium.pics/3dPQmsDU.jpg", 
-    downloadLink: "https://link4m.net/TnS8qM" 
-  },
-
-  // ================== ANDROID - ỨNG DỤNG ==================
-  { 
-    id: 8, 
-    name: "TIKTOK MOD ANDROID MỚI NHẤT", 
-    date: "Cập Nhật Ngày 1/11/26", 
-    price: "Free", 
-    badge: "", badgeText: "", 
-    platform: "android", type: "app",
-    image2: "https://copium.pics/gWaraSWA.jpg",
-    image1: "https://copium.pics/ALVncDmA.webp", 
-    downloadLink: "https://link4m.org/n4ama" 
+    name: "FFARIS MỚI NHẤT OB55", 
+    date: "Fix Dame - Fix Lag - Nhìn Thấy Đồ", 
+    platform: "ios", 
+    bannerImg: "https://copium.pics/54vkwPcd.jpg", 
+    iconImg: "https://copium.pics/cFMAru7F.jpg",
+    
+    downloadLink: "https://link4m.net/HXMun", // Link Download
+    unlockIdLink: "https://link4m.net/Z0vj7", // <-- ĐÃ THÊM LINK UNLOCK ID
+    dashLink: ""      
   },
 ];
 
 /* ================================================================
-   CODE BÊN DƯỚI KHÔNG CẦN SỬA
+   RENDER APP
 ================================================================ */
-
-let currentPlatform = "ios";
-let currentType = "game";
-
-function renderProducts() {
-  const grid = document.getElementById("grid");
-  const list = products.filter(p => p.platform === currentPlatform && p.type === currentType);
-
-  if (list.length === 0) {
-    grid.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">🔍</div>
-        <p>Chưa có ${currentType === 'game' ? 'mod game' : 'ứng dụng'} nào cho ${currentPlatform.toUpperCase()}.<br>Vui lòng chọn mục khác!</p>
-      </div>
-    `;
+function renderApps() {
+  const container = document.getElementById("app-list");
+  if (apps.length === 0) {
+    container.innerHTML += `<p style="text-align:center; color:#888; margin-top:20px;">Chưa có app nào được thêm...</p>`;
     return;
   }
-  
-  grid.innerHTML = list.map((p, i) => {
-    // Nút GetKey
-    const getKeyBtn = p.hasGetKey 
-      ? `<button class="btn-getkey" onclick="getKey(${p.id})">GetKey</button>` 
-      : '';
 
-    // Nút Tải xuống: Dùng thẻ <a> thay vì window.open để tránh bị chặn popup
-    let downloadBtn = '';
-    if (p.downloadLink && p.downloadLink.trim() !== "") {
-      downloadBtn = `<a href="${p.downloadLink}" target="_blank" class="btn-dl-new">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          Tải Xuống
-        </a>`;
+  let html = '';
+  apps.forEach(app => {
+    let badge = app.platform === 'ios' 
+      ? `<span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>`
+      : `<span class="vthangios-platform-badge"><i class="bi bi-android2"></i> Android</span>`;
+
+    let banner = app.bannerImg ? `<img src="${app.bannerImg}" alt="${app.name}">` : '';
+    let icon = app.iconImg ? `<img src="${app.iconImg}" alt="${app.name}">` : '';
+
+    let actions = '';
+    
+    if (app.downloadLink) {
+      actions += `<a href="${app.downloadLink}" target="_blank" class="vthangios-download-btn vthangios-app-cta"><i class="bi bi-download"></i> Download</a>`;
     } else {
-      downloadBtn = `<button onclick="showToast('⏳ Đang cập nhật!')" class="btn-dl-new">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          Tải Xuống
-        </button>`;
+      actions += `<button onclick="alert('Đang cập nhật link Download!')" class="vthangios-download-btn vthangios-app-cta"><i class="bi bi-download"></i> Download</button>`;
+    }
+    
+    if (app.unlockIdLink) {
+      actions += `<a href="${app.unlockIdLink}" target="_blank" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</a>`;
+    } else {
+      actions += `<button onclick="alert('Đang cập nhật link Unlock ID!')" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</button>`;
     }
 
-    return `
-    <div class="card" style="animation:fadeUp .5s ${i*0.05}s both;">
-      
-      <!-- ẢNH 2 (Ảnh to bìa) -->
-      <div class="card-cover">
-        <img src="${p.image2 || 'https://via.placeholder.com/600x300/1a1a28/ffffff?text=No+Cover+Image'}" alt="Cover">
-      </div>
+    if (app.dashLink) {
+      actions += `<a href="${app.dashLink}" target="_blank" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</a>`;
+    } else {
+      actions += `<button onclick="alert('Đang cập nhật link FFARIS Dash!')" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</button>`;
+    }
 
-      <!-- KHỐI THÔNG TIN & ẢNH 1 -->
-      <div class="card-info-container">
-        <!-- ẢNH 1 (Icon nhỏ đè lên) -->
-        <div class="card-icon">
-          <img src="${p.image1 || 'https://via.placeholder.com/150/1a1a28/ffffff?text=Icon'}" alt="Icon">
+    html += `
+    <div class="vthangios-app-entry">
+      <div class="vthangios-app-item">
+        <div class="vthangios-app-banner">
+          ${banner}
+          <span class="vthangios-app-banner-badges">${badge}</span>
         </div>
-
-        ${p.badge ? `<span class="card-badge badge-${p.badge}">${p.badgeText}</span>` : ''}
-        
-        <h3 class="card-title">${p.name}</h3>
-        ${p.date ? `<p class="card-date">${p.date}</p>` : ''}
-        
-        <div class="card-actions">
-          ${downloadBtn}
-          ${getKeyBtn}
+        <div class="vthangios-app-info">
+          <div class="vthangios-app-icon-wrap">
+            ${icon}
+          </div>
+          <div>
+            <span class="vthangios-app-name">${app.name}</span>
+            <span class="vthangios-app-desc">${app.date}</span>
+          </div>
+          <div class="vthangios-app-actions">
+            ${actions}
+          </div>
         </div>
       </div>
     </div>
-  `;
-  }).join("");
+    `;
+  });
+  container.innerHTML += html;
 }
 
-document.getElementById("platform-filter").addEventListener("click", e => {
-  const btn = e.target.closest(".platform-btn");
-  if (!btn) return;
-  document.querySelectorAll(".platform-btn").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  currentPlatform = btn.dataset.platform;
-  renderProducts();
-});
+renderApps();
 
-document.getElementById("type-filter").addEventListener("click", e => {
-  const btn = e.target.closest(".type-btn");
-  if (!btn) return;
-  document.querySelectorAll(".type-btn").forEach(b => b.classList.remove("active"));
-  btn.classList.add("active");
-  currentType = btn.dataset.type;
-  renderProducts();
-});
-
-// Hàm xử lý khi bấm nút GetKey
-function getKey(id) {
-  const product = products.find(p => p.id === id);
-  if (!product) return;
+/* ================================================================
+   CHUYỂN ĐỔI SÁNG / TỐI
+================================================================ */
+function vtToggleTheme() {
+  const body = document.body;
+  const icon = document.getElementById('theme-icon');
+  body.classList.toggle('vthangios-dark');
   
-  showToast(`🔑 Đang lấy Key cho ${product.name}... Vui lòng đợi!`);
-}
-
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg;
-  t.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), 3000);
-}
-
-window.addEventListener("scroll", () => {
-  const header = document.querySelector(".header");
-  header.style.background = window.scrollY > 50 
-    ? "rgba(8,8,13,0.95)" 
-    : "rgba(8,8,13,0.85)";
-});
-
-const style = document.createElement("style");
-style.textContent = `
-  @keyframes fadeUp {
-    from { opacity:0; transform:translateY(20px); }
-    to { opacity:1; transform:translateY(0); }
+  if (body.classList.contains('vthangios-dark')) {
+    icon.className = 'bi bi-sun-fill';
+    localStorage.setItem('vthangios_theme_v2', 'dark');
+  } else {
+    icon.className = 'bi bi-moon-fill';
+    localStorage.setItem('vthangios_theme_v2', 'light');
   }
-`;
-document.head.appendChild(style);
-
-renderProducts();
+}
 </script>
 </body>
 </html>
