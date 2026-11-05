@@ -250,12 +250,12 @@ const apps = [
   { 
     name: "FFARIS MỚI NHẤT OB55", 
     date: "Fix Dame - Fix Lag - Nhìn Thấy Đồ", 
-    platform: "ios", 
+    platform: "both", // <-- Đổi thành "both" để hiện cả 2 logo
     bannerImg: "https://copium.pics/54vkwPcd.jpg", 
     iconImg: "https://copium.pics/cFMAru7F.jpg",
     
-    downloadLink: "https://link4m.net/HXMun", // Link Download
-    unlockIdLink: "https://link4m.net/Z0vj7", // <-- ĐÃ THÊM LINK UNLOCK ID
+    downloadLink: "https://link4m.net/HXMun", 
+    unlockIdLink: "https://link4m.net/Z0vj7", 
     dashLink: ""      
   },
 ];
@@ -272,9 +272,18 @@ function renderApps() {
 
   let html = '';
   apps.forEach(app => {
-    let badge = app.platform === 'ios' 
-      ? `<span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>`
-      : `<span class="vthangios-platform-badge"><i class="bi bi-android2"></i> Android</span>`;
+    // Xử lý hiển thị Badge nền tảng
+    let badge = '';
+    if (app.platform === 'ios') {
+      badge = `<span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>`;
+    } else if (app.platform === 'android') {
+      badge = `<span class="vthangios-platform-badge"><i class="bi bi-android2"></i> Android</span>`;
+    } else if (app.platform === 'both') {
+      badge = `
+        <span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>
+        <span class="vthangios-platform-badge"><i class="bi bi-android2"></i> Android</span>
+      `;
+    }
 
     let banner = app.bannerImg ? `<img src="${app.bannerImg}" alt="${app.name}">` : '';
     let icon = app.iconImg ? `<img src="${app.iconImg}" alt="${app.name}">` : '';
