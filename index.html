@@ -45,7 +45,6 @@ body {
   padding-bottom: 50px;
 }
 
-/* NAV */
 .vthangios-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: flex-end; gap: 10px;
@@ -62,10 +61,8 @@ body {
   cursor: pointer; box-shadow: 0 2px 10px var(--shadow-color);
 }
 
-/* MAIN LAYOUT */
 main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; }
 
-/* AVATAR */
 .vthangios-avatar-wrap {
   position: relative; width: 130px; height: 130px;
   margin: 0 auto 15px;
@@ -85,10 +82,8 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
 }
 @keyframes spin { 100% { transform: rotate(360deg); } }
 
-/* PROFILE INFO */
 .vthangios-iam { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; margin-bottom: 5px; }
 
-/* HIỆU ỨNG NEON ĐỔI MÀU CHO TÊN */
 .vthangios-name {
   font-size: 1.7rem; font-weight: 800; margin: 5px 0 20px;
   display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -107,12 +102,10 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
   100% { background-position: 100% 50%; }
 }
 
-/* SOCIALS */
 .vthangios-socials { display: flex; justify-content: center; gap: 15px; margin: 25px 0 30px; }
 .vthangios-social-item { transition: transform 0.2s; }
 .vthangios-social-item:hover { transform: translateY(-5px) scale(1.1); }
 
-/* APP LIST */
 .vthangios-app-section { padding: 0 20px; text-align: left; }
 
 .vthangios-app-entry {
@@ -143,7 +136,6 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
 .vthangios-app-name { display: block; font-size: 1.15rem; font-weight: 800; margin-top: 20px; margin-bottom: 4px; }
 .vthangios-app-desc { font-size: 0.9rem; color: var(--text-muted); font-style: italic; }
 
-/* KHUNG CHỨA NÚT */
 .vthangios-app-actions { 
   display: flex; 
   flex-direction: column; 
@@ -158,25 +150,21 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
   transition: all 0.2s; border: none;
 }
 
-/* Nút Download (Màu Xanh Dương) */
 .vthangios-download-btn {
   background: var(--btn-primary); color: var(--btn-text);
   box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 .vthangios-download-btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
-/* Nút Unlock ID (Màu Xám/Nhạt) */
 .vthangios-app-getkey.is-main { background: var(--btn-sub); color: var(--btn-sub-text); }
 .vthangios-app-getkey:hover { opacity: 0.8; transform: translateY(-2px); }
 
-/* Nút FFARIS Dash (Màu Xanh Lá) */
 .btn-dash {
   background: #10b981; color: #fff;
   box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 .btn-dash:hover { opacity: 0.9; transform: translateY(-2px); }
 
-/* FOOTER */
 .vthangios-footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); padding: 30px 20px; border-top: 1px solid var(--border-color); margin-top: 40px; }
 </style>
 </head>
@@ -193,7 +181,6 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
 </script>
 
 <main role="main">
-  <!-- NAV -->
   <nav class="vthangios-nav" aria-label="Điều hướng chính">
     <button class="vthangios-bell-btn" aria-label="Thông báo">
       <i class="fas fa-bell"></i>
@@ -203,20 +190,17 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
     </button>
   </nav>
 
-  <!-- AVATAR -->
   <div class="vthangios-avatar-wrap has-frame">
     <img class="vthangios-avatar" src="https://copium.pics/4qjepM2C.jpg" alt="Khuong Duy">
     <div class="vthangios-avatar-frame"></div>
   </div>
 
-  <!-- NAME -->
   <p class="vthangios-iam">Hi, i am</p>
   <h1 class="vthangios-name">
     <span class="neon-text">Khuong Duy</span>
     <i class="fas fa-check-circle" style="color: #3b82f6; font-size: 1.3rem;"></i>
   </h1>
 
-  <!-- SOCIALS -->
   <div class="vthangios-socials">
     <a href="https://discord.gg/7t3P5zpu" class="vthangios-social-item" target="_blank">
       <i class="fa-brands fa-discord" style="color:#5865F2; font-size: 45px;"></i>
@@ -229,40 +213,33 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
     </a>
   </div>
 
-  <!-- APP SECTION -->
   <section class="vthangios-app-section" aria-label="Danh sách ứng dụng">
     <div class="vthangios-group-block" id="app-list">
       <!-- App sẽ render ở đây -->
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="vthangios-footer">
     &copy; Designer by Khuong Duy 2026
   </footer>
 </main>
 
 <script>
-/* ================================================================
-   DỮ LIỆU APP (MÀY ĐIỀN VÀO ĐÂY)
-================================================================ */
 const apps = [
   { 
     name: "FFARIS MỚI NHẤT OB55", 
     date: "Fix Dame - Fix Lag - Nhìn Thấy Đồ", 
-    platform: "both", // <-- Đổi thành "both" để hiện cả 2 logo
+    platform: "both", 
     bannerImg: "https://copium.pics/54vkwPcd.jpg", 
     iconImg: "https://copium.pics/cFMAru7F.jpg",
     
     downloadLink: "https://link4m.net/HXMun", 
-    unlockIdLink: "https://link4m.net/Z0vj7", 
+    // ĐÂY LÀ CHỖ TRỎ SANG TRANG UNLOCK.HTML
+    unlockIdLink: "unlock.html", 
     dashLink: ""      
   },
 ];
 
-/* ================================================================
-   RENDER APP
-================================================================ */
 function renderApps() {
   const container = document.getElementById("app-list");
   if (apps.length === 0) {
@@ -272,7 +249,6 @@ function renderApps() {
 
   let html = '';
   apps.forEach(app => {
-    // Xử lý hiển thị Badge nền tảng
     let badge = '';
     if (app.platform === 'ios') {
       badge = `<span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>`;
@@ -297,7 +273,8 @@ function renderApps() {
     }
     
     if (app.unlockIdLink) {
-      actions += `<a href="${app.unlockIdLink}" target="_blank" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</a>`;
+      // TRỎ SANG TRANG UNLOCK.HTML
+      actions += `<a href="${app.unlockIdLink}" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</a>`;
     } else {
       actions += `<button onclick="alert('Đang cập nhật link Unlock ID!')" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</button>`;
     }
@@ -336,9 +313,6 @@ function renderApps() {
 
 renderApps();
 
-/* ================================================================
-   CHUYỂN ĐỔI SÁNG / TỐI
-================================================================ */
 function vtToggleTheme() {
   const body = document.body;
   const icon = document.getElementById('theme-icon');
