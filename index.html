@@ -804,20 +804,21 @@ const apps = [
     downloadLink: "https://link4m.net/xNTr4",
     unlockIdLink: "",
     dashLink: "",
-    isNew: true
+    isNew: true,
+    hideExtras: true
   }
 ];
 
 // 2. DỮ LIỆU ỨNG DỤNG
 // Thêm platform: "ios", "android", hoặc "both" cho từng ứng dụng
 const storeApps = [
-  // {
-  //   name: "Tên Ứng Dụng",
-  //   desc: "Mô tả ngắn",
-  //   platform: "both", // ios | android | both
-  //   icon: "link_anh",
-  //   link: "link_tai"
-  // }
+  {
+    name: "3105",
+    desc: "",
+    platform: "ios",
+    icon: "https://copium.pics/UZpfqhZ7.webp",
+    link: "https://vuotnhanh.com/VUgj"
+  }
 ];
 
 // BIẾN LƯU TRẠNG THÁI TAB
@@ -861,14 +862,27 @@ function renderApps() {
     let newBadge = app.isNew ? `<span class="badge-new">NEW</span>` : '';
 
     let actions = '';
-    if (app.downloadLink) actions += `<a href="${app.downloadLink}" target="_blank" class="vthangios-download-btn vthangios-app-cta" onclick="vtTrackDownload()"><i class="bi bi-download"></i> Download</a>`;
-    else actions += `<button onclick="vtToast('Đang cập nhật link Download!','info')" class="vthangios-download-btn vthangios-app-cta"><i class="bi bi-download"></i> Download</button>`;
+    // Nút Download luôn hiển thị
+    if (app.downloadLink) {
+      actions += `<a href="${app.downloadLink}" target="_blank" class="vthangios-download-btn vthangios-app-cta" onclick="vtTrackDownload()"><i class="bi bi-download"></i> Download</a>`;
+    } else {
+      actions += `<button onclick="vtToast('Đang cập nhật link Download!','info')" class="vthangios-download-btn vthangios-app-cta"><i class="bi bi-download"></i> Download</button>`;
+    }
     
-    if (app.unlockIdLink) actions += `<a href="${app.unlockIdLink}" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</a>`;
-    else actions += `<button onclick="vtToast('Đang cập nhật link Unlock ID!','info')" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</button>`;
-    
-    if (app.dashLink) actions += `<a href="${app.dashLink}" target="_blank" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</a>`;
-    else actions += `<button onclick="vtToast('Đang cập nhật link FFARIS Dash!','info')" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</button>`;
+    // Nếu KHÔNG PHẢI là app hideExtras thì mới render 2 nút còn lại
+    if (!app.hideExtras) {
+      if (app.unlockIdLink) {
+        actions += `<a href="${app.unlockIdLink}" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</a>`;
+      } else {
+        actions += `<button onclick="vtToast('Đang cập nhật link Unlock ID!','info')" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</button>`;
+      }
+      
+      if (app.dashLink) {
+        actions += `<a href="${app.dashLink}" target="_blank" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</a>`;
+      } else {
+        actions += `<button onclick="vtToast('Đang cập nhật link FFARIS Dash!','info')" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</button>`;
+      }
+    }
 
     html += `
     <div class="vthangios-app-entry">
@@ -919,12 +933,15 @@ function renderStoreApps() {
 
   let html = '';
   filteredStoreApps.forEach(function(app) {
+    // Nếu không có mô tả thì ẩn thẻ desc đi để giao diện không bị trống
+    let descHtml = app.desc ? `<div class="vt-store-desc">${app.desc}</div>` : '';
+    
     html += `
       <div class="vt-store-item">
         <img src="${app.icon}" alt="${app.name}" class="vt-store-icon" onerror="this.src='https://via.placeholder.com/65?text=App'">
         <div class="vt-store-info">
           <div class="vt-store-name">${app.name}</div>
-          <div class="vt-store-desc">${app.desc}</div>
+          ${descHtml}
         </div>
         <a href="${app.link}" target="_blank" class="vt-store-btn">Nhận</a>
       </div>
