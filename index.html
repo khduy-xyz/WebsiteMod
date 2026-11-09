@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Khuong Duy</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<style>
+  <head>
+    <base href="https://khduy-xyz.github.io/WebsiteMod/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khuong Duy</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
 :root {
   --bg-main: #f8f9fa;
   --bg-card: #ffffff;
@@ -63,24 +64,34 @@ body {
 
 main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; }
 
+/* --- AVATAR VÀ KHUNG --- */
 .vthangios-avatar-wrap {
-  position: relative; width: 130px; height: 130px;
+  position: relative;
+  width: 130px; height: 130px;
   margin: 0 auto 15px;
-  background: var(--border-color);
-  border-radius: 50%;
 }
 .vthangios-avatar {
-  width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-  border: 4px solid var(--bg-card); box-shadow: 0 4px 15px var(--shadow-color);
-  position: relative; z-index: 2;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--bg-card);
+  box-shadow: 0 4px 15px var(--shadow-color);
+  position: relative;
+  z-index: 2;
 }
 .vthangios-avatar-frame {
-  position: absolute; top: -8px; left: -8px; width: calc(100% + 16px); height: calc(100% + 16px);
-  z-index: 1; border-radius: 50%; border: 2px dashed var(--btn-primary);
-  animation: spin 8s linear infinite;
+  position: absolute;
+  top: -12%; left: -12%;
+  width: 124%; height: 124%;
+  object-fit: contain;
   pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
+  transition: transform 0.3s ease;
 }
-@keyframes spin { 100% { transform: rotate(360deg); } }
+.vthangios-avatar-wrap:hover .vthangios-avatar-frame {
+  transform: scale(1.05) rotate(3deg);
+}
 
 .vthangios-iam { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; margin-bottom: 5px; }
 
@@ -89,24 +100,97 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
   display: flex; align-items: center; justify-content: center; gap: 8px;
 }
 .neon-text {
-  background: linear-gradient(90deg, #ff007f, #ff8c00, #ffd700, #00ff00, #00ffff, #007bff, #8a2be2, #ff007f);
+  background: linear-gradient(90deg, #ffffff, #000000, #ffffff, #000000, #ffffff);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: neon-flow 4s linear infinite;
-  filter: drop-shadow(0 0 5px rgba(255, 0, 127, 0.4));
+  animation: neon-flow 5s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.3));
 }
 @keyframes neon-flow {
   0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* --- TÍCH XANH --- */
+.vt-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 4px rgba(0, 102, 255, 0.35));
+  transition: transform 0.2s ease;
+}
+.vt-verified-badge:hover {
+  transform: scale(1.15) rotate(8deg);
+}
+.vt-verified-badge svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .vthangios-socials { display: flex; justify-content: center; gap: 15px; margin: 25px 0 30px; }
 .vthangios-social-item { transition: transform 0.2s; }
 .vthangios-social-item:hover { transform: translateY(-5px) scale(1.1); }
 
-.vthangios-app-section { padding: 0 20px; text-align: left; }
+.vthangios-app-section { padding: 0 20px; text-align: left; margin-bottom: 40px; }
+
+/* --- TABS NỀN TẢNG --- */
+.vt-tabs-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.vt-tab-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+.vt-tab-btn:hover {
+  background: var(--btn-sub);
+  color: var(--text-main);
+}
+.vt-tab-btn.active {
+  background: var(--btn-primary);
+  color: var(--btn-text);
+  border-color: var(--btn-primary);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+}
+.vt-tab-btn .vt-tab-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+.vt-tab-btn.active .vt-tab-icon {
+  filter: brightness(0) invert(1);
+}
+
+.vt-custom-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+}
 
 .vthangios-app-entry {
   margin-bottom: 25px; background: var(--bg-card); border-radius: 20px;
@@ -165,66 +249,540 @@ main { max-width: 650px; margin: 0 auto; padding-top: 80px; text-align: center; 
 }
 .btn-dash:hover { opacity: 0.9; transform: translateY(-2px); }
 
-.vthangios-footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); padding: 30px 20px; border-top: 1px solid var(--border-color); margin-top: 40px; }
-</style>
-</head>
-<body>
+/* --- CSS CHO DANH SÁCH ỨNG DỤNG DẠNG NGANG --- */
+.vt-app-store-section {
+  padding: 0 20px;
+  text-align: left;
+  margin-bottom: 40px;
+}
+.vt-store-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+}
+.vt-store-title i {
+  color: var(--btn-primary);
+}
+.vt-store-list {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 15px var(--shadow-color);
+  overflow: hidden;
+}
+.vt-store-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+  gap: 15px;
+}
+.vt-store-item:last-child {
+  border-bottom: none;
+}
+.vt-store-icon {
+  width: 65px;
+  height: 65px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+.vt-store-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.vt-store-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 3px;
+}
+.vt-store-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vt-store-btn {
+  background: var(--btn-sub);
+  color: #3b82f6;
+  border: none;
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.vt-store-btn:hover {
+  background: var(--border-color);
+}
+body.vthangios-dark .vt-store-btn {
+  background: rgba(59, 130, 246, 0.15);
+}
+body.vthangios-dark .vt-store-btn:hover {
+  background: rgba(59, 130, 246, 0.25);
+}
 
-<script>
+.vthangios-footer { text-align: center; font-size: 0.9rem; color: var(--text-muted); padding: 30px 20px; border-top: 1px solid var(--border-color); margin-top: 40px; }
+
+/* --- HIỆU ỨNG ĐÁNH MÁY --- */
+.vt-typing::after {
+  content: '|';
+  animation: vtBlink 0.8s step-end infinite;
+  color: var(--text-main);
+  font-weight: 400;
+}
+@keyframes vtBlink { 50% { opacity: 0; } }
+
+/* --- RIPPLE EFFECT --- */
+.vthangios-app-actions button,
+.vthangios-app-actions a,
+.vthangios-bell-btn,
+.vthangios-theme-btn {
+  position: relative;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  transform: scale(0);
+  animation: rippleAnim 0.6s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* --- SKELETON LOADING --- */
+.skeleton {
+  background: linear-gradient(90deg, var(--border-color) 25%, var(--bg-card) 50%, var(--border-color) 75%);
+  background-size: 200% 100%;
+  animation: skeletonLoad 1.2s infinite;
+}
+@keyframes skeletonLoad {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* --- BADGE NEW --- */
+.badge-new {
+  position: absolute; top: 12px; right: 12px;
+  background: #ef4444; color: #fff;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 0.7rem; font-weight: 800;
+  animation: pulseNew 1.5s infinite;
+  z-index: 3;
+}
+@keyframes pulseNew {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239,68,68,0.7); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+}
+
+/* --- TOAST NOTIFICATION --- */
+#vtToastContainer {
+  position: fixed; top: 80px; right: 20px; z-index: 9999;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.vt-toast {
+  background: var(--bg-card); color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 12px 18px; border-radius: 10px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  font-size: 0.9rem; font-weight: 600;
+  animation: toastIn 0.3s ease;
+  display: flex; align-items: center; gap: 10px;
+}
+@keyframes toastIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* --- PANEL THÔNG BÁO --- */
+#vtNotiPanel {
+  position: fixed; top: 70px; right: 20px;
+  width: 300px; max-height: 400px; overflow-y: auto;
+  background: var(--bg-card); border: 1px solid var(--border-color);
+  border-radius: 14px; box-shadow: 0 10px 40px var(--shadow-color);
+  padding: 16px; z-index: 200;
+  display: none;
+}
+#vtNotiPanel.open { display: block; animation: toastIn 0.25s ease; }
+.vt-noti-item {
+  padding: 10px 0; border-bottom: 1px solid var(--border-color);
+  font-size: 0.85rem; color: var(--text-main);
+}
+.vt-noti-item:last-child { border-bottom: none; }
+.vt-noti-item small { color: var(--text-muted); display: block; margin-top: 2px; }
+
+/* --- NÚT BACK TO TOP --- */
+#vtBackTop {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--btn-primary); color: var(--btn-text);
+  border: none; cursor: pointer; font-size: 1.2rem;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  display: none; z-index: 150;
+  transition: transform 0.2s;
+}
+#vtBackTop:hover { transform: translateY(-3px); }
+
+/* --- PROGRESS BAR ĐỌC --- */
+#vtProgressBar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  z-index: 9999; transition: width 0.1s;
+}
+
+/* --- STATS BAR --- */
+.vt-stats {
+  display: flex; justify-content: center; gap: 25px;
+  margin: 20px 0; padding: 15px;
+  background: var(--bg-card); border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+.vt-stat-item { text-align: center; }
+.vt-stat-num { font-size: 1.3rem; font-weight: 800; color: var(--btn-primary); }
+.vt-stat-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+
+/* --- BẢNG THÔNG BÁO CHÀO MỪNG --- */
+#vtWelcomeOverlay {
+  position: fixed; inset: 0; z-index: 100000;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: vtFadeIn 0.4s ease;
+}
+@keyframes vtFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+#vtWelcomeBox {
+  position: relative;
+  width: 100%; max-width: 440px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 32px 26px 26px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+  overflow: hidden;
+  animation: vtPopIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+}
+@keyframes vtPopIn {
+  from { transform: scale(0.7) translateY(40px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+#vtWelcomeBox::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(135deg, #ff007f, #ff8c00, #ffd700, #00ff00, #00ffff, #007bff, #8a2be2, #ff007f);
+  background-size: 300% 300%;
+  animation: vtNeonBorder 5s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+@keyframes vtNeonBorder {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.vt-welcome-glow {
+  position: absolute; top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(59,130,246,0.35), transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.vt-welcome-icon {
+  position: relative;
+  width: 80px; height: 80px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem; color: #fff;
+  box-shadow: 0 10px 30px rgba(59,130,246,0.5);
+  animation: vtIconFloat 3s ease-in-out infinite;
+}
+@keyframes vtIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.vt-welcome-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg, #ff007f, #ff8c00, #ffd700, #00ff00, #00ffff, #007bff, #8a2be2, #ff007f);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: neon-flow 4s linear infinite;
+}
+
+.vt-welcome-sub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+.vt-welcome-features {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 22px; text-align: left;
+}
+.vt-welcome-feature {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  background: var(--btn-sub);
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-main);
+  animation: vtFeatureSlide 0.5s ease backwards;
+}
+.vt-welcome-feature:nth-child(1) { animation-delay: 0.15s; }
+.vt-welcome-feature:nth-child(2) { animation-delay: 0.25s; }
+.vt-welcome-feature:nth-child(3) { animation-delay: 0.35s; }
+@keyframes vtFeatureSlide {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.vt-welcome-feature i {
+  font-size: 1.1rem;
+  color: var(--btn-primary);
+  flex-shrink: 0;
+}
+
+.vt-welcome-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(59,130,246,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.vt-welcome-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(59,130,246,0.55);
+}
+.vt-welcome-btn:active { transform: translateY(0); }
+
+.vt-welcome-hide {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+.vt-welcome-hide input {
+  width: 16px; height: 16px;
+  accent-color: var(--btn-primary);
+  cursor: pointer;
+}
+</style>
+  </head>
+  <body>
+    <div id="vtProgressBar"></div>
+    <div id="vtToastContainer"></div>
+    <div id="vtNotiPanel">
+      <!-- THÔNG BÁO ĐẶC BIỆT -->
+      <div class="vt-noti-item" style="border-left: 3px solid #ef4444; padding-left: 10px; background: rgba(239, 68, 68, 0.05); border-radius: 8px; margin-bottom: 5px;">
+        <strong style="color: #ef4444; display: flex; align-items: center; gap: 6px;">
+          <i class="fas fa-triangle-exclamation"></i> LƯU Ý QUAN TRỌNG
+        </strong>
+        <span style="display: block; margin-top: 5px; line-height: 1.5;">
+          Nếu link rút gọn bị <b>lỗi</b> hoặc <b>không thể vượt qua</b>, vui lòng inbox Discord cho Admin sớm nhất để được hỗ trợ fix kịp thời.
+        </span>
+        <div style="margin-top: 10px;">
+          <a href="https://discord.gg/4MGVwcnh" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 8px 12px; background: #5865F2; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.85rem; transition: opacity 0.2s;">
+            <i class="fa-brands fa-discord"></i> Inbox Admin qua Discord
+          </a>
+        </div>
+      </div>
+    </div>
+    <script>
   (function(){
     var t=null;
     try{ t=localStorage.getItem('vthangios_theme_v2') }catch(e){}
+    // Mặc định luôn là sáng (trắng) trừ khi đã chọn tối trước đó
     if(t==='dark') {
       document.body.classList.add('vthangios-dark');
+    } else {
+      document.body.classList.remove('vthangios-dark');
     }
   })();
 </script>
+    <main role="main">
+      <nav class="vthangios-nav" aria-label="Điều hướng chính">
+        <button class="vthangios-bell-btn" onclick="vtToggleNoti()" aria-label="Thông báo">
+          <i class="fas fa-bell">
+          </i>
+        </button>
+        <button class="vthangios-theme-btn" onclick="vtToggleTheme()" aria-label="Chuyển chế độ">
+          <i class="bi bi-moon-fill" id="theme-icon">
+          </i>
+        </button>
+      </nav>
+      <div class="vthangios-avatar-wrap">
+        <img class="vthangios-avatar" src="https://copium.pics/4qjepM2C.jpg" alt="Khuong Duy">
+        <img class="vthangios-avatar-frame" src="https://copium.pics/quYUBzjz.webp" alt="Khung Avatar">
+      </div>
+      <p class="vthangios-iam">Hi, i am</p>
+      <h1 class="vthangios-name">
+        <span class="neon-text">Khuong Duy</span>
+        <span class="vt-verified-badge" title="Đã xác minh">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1.5L14.7 3.9L18.2 3.4L19.6 6.7L23.1 7.5L22.8 11.1L25 14L22.8 16.9L23.1 20.5L19.6 21.3L18.2 24.6L14.7 24.1L12 26.5L9.3 24.1L5.8 24.6L4.4 21.3L0.9 20.5L1.2 16.9L-1 14L1.2 11.1L0.9 7.5L4.4 6.7L5.8 3.4L9.3 3.9L12 1.5Z" fill="#0066FF"/>
+            <path d="M12 1.5L14.7 3.9L18.2 3.4L19.6 6.7L23.1 7.5L22.8 11.1L25 14L22.8 16.9L23.1 20.5L19.6 21.3L18.2 24.6L14.7 24.1L12 26.5L9.3 24.1L5.8 24.6L4.4 21.3L0.9 20.5L1.2 16.9L-1 14L1.2 11.1L0.9 7.5L4.4 6.7L5.8 3.4L9.3 3.9L12 1.5Z" fill="url(#vtGradientBadge)"/>
+            <path d="M6.5 14L10 17.5L17.5 10" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="vtGradientBadge" x1="0" y1="0" x2="25" y2="26.5" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1D9BF0"/>
+                <stop offset="1" stop-color="#0057D9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+      </h1>
+      <div class="vt-stats">
+        <div class="vt-stat-item">
+          <div class="vt-stat-num" id="statApps">0</div>
+          <div class="vt-stat-label">Ứng dụng</div>
+        </div>
+        <div class="vt-stat-item">
+          <div class="vt-stat-num" id="statDownloads">0</div>
+          <div class="vt-stat-label">Lượt tải</div>
+        </div>
+        <div class="vt-stat-item">
+          <div class="vt-stat-num" id="statOnline">1</div>
+          <div class="vt-stat-label">Online</div>
+        </div>
+      </div>
+      <div class="vthangios-socials">
+        <a href="https://discord.gg/4MGVwcnh" class="vthangios-social-item" target="_blank">
+          <i class="fa-brands fa-discord" style="color:#5865F2; font-size: 45px;">
+          </i>
+        </a>
+        <a href="https://t.me/khduylato" class="vthangios-social-item" target="_blank">
+          <i class="fa-brands fa-telegram" style="color:#2AABEE; font-size: 45px;">
+          </i>
+        </a>
+      </div>
+      
+      <!-- MỤC 1: GAME MOD -->
+      <section class="vthangios-app-section" aria-label="Danh sách Game Mod">
+        <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; color: var(--text-main);">
+          <i class="fas fa-gamepad" style="color: var(--btn-primary);"></i> Game Mod
+        </h2>
+        
+        <div class="vt-tabs-container">
+          <button class="vt-tab-btn active" id="tab-ios" onclick="vtFilterPlatform('ios')">
+            <i class="fab fa-apple"></i> iOS
+          </button>
+          <button class="vt-tab-btn" id="tab-android" onclick="vtFilterPlatform('android')">
+            <img src="https://copium.pics/t5hvRHHG.webp" alt="Android" class="vt-tab-icon"> Android
+          </button>
+        </div>
 
-<main role="main">
-  <nav class="vthangios-nav" aria-label="Điều hướng chính">
-    <button class="vthangios-bell-btn" aria-label="Thông báo">
-      <i class="fas fa-bell"></i>
-    </button>
-    <button class="vthangios-theme-btn" onclick="vtToggleTheme()" aria-label="Chuyển chế độ">
-      <i class="bi bi-moon-fill" id="theme-icon"></i>
-    </button>
-  </nav>
+        <div class="vthangios-group-block" id="app-list"></div>
+      </section>
 
-  <div class="vthangios-avatar-wrap has-frame">
-    <img class="vthangios-avatar" src="https://copium.pics/4qjepM2C.jpg" alt="Khuong Duy">
-    <div class="vthangios-avatar-frame"></div>
-  </div>
+      <!-- MỤC 2: KHO ỨNG DỤNG -->
+      <section class="vt-app-store-section" aria-label="Danh sách Ứng dụng">
+        <h2 class="vt-store-title"><i class="fas fa-cube"></i> Kho Ứng Dụng</h2>
+        
+        <div class="vt-tabs-container">
+          <button class="vt-tab-btn active" id="store-tab-ios" onclick="vtFilterStorePlatform('ios')">
+            <i class="fab fa-apple"></i> iOS
+          </button>
+          <button class="vt-tab-btn" id="store-tab-android" onclick="vtFilterStorePlatform('android')">
+            <img src="https://copium.pics/t5hvRHHG.webp" alt="Android" class="vt-tab-icon"> Android
+          </button>
+        </div>
 
-  <p class="vthangios-iam">Hi, i am</p>
-  <h1 class="vthangios-name">
-    <span class="neon-text">Khuong Duy</span>
-    <i class="fas fa-check-circle" style="color: #3b82f6; font-size: 1.3rem;"></i>
-  </h1>
-
-  <div class="vthangios-socials">
-    <a href="https://discord.gg/7t3P5zpu" class="vthangios-social-item" target="_blank">
-      <i class="fa-brands fa-discord" style="color:#5865F2; font-size: 45px;"></i>
-    </a>
-    <a href="https://t.me/khduylato" class="vthangios-social-item" target="_blank">
-      <i class="fa-brands fa-telegram" style="color:#2AABEE; font-size: 45px;"></i>
-    </a>
-    <a href="https://www.youtube.com/@khuongduylato" class="vthangios-social-item" target="_blank">
-      <i class="fa-brands fa-youtube" style="color:#FF0000; font-size: 45px;"></i>
-    </a>
-  </div>
-
-  <section class="vthangios-app-section" aria-label="Danh sách ứng dụng">
-    <div class="vthangios-group-block" id="app-list">
-      <!-- App sẽ render ở đây -->
+        <div class="vt-store-list" id="store-app-list"></div>
+      </section>
+      
+      <footer class="vthangios-footer">
+        &copy; Designer by Khuong Duy 2026
+      </footer>
+    </main>
+    <button id="vtBackTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+    
+    <div id="vtWelcomeOverlay" style="display:none;">
+      <div id="vtWelcomeBox">
+        <div class="vt-welcome-glow"></div>
+        <div class="vt-welcome-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <div class="vt-welcome-title">Chào Mừng Đến Với Khuong Duy!</div>
+        <div class="vt-welcome-sub">Nơi chia sẻ những ứng dụng &amp; công cụ mới nhất</div>
+        <div class="vt-welcome-features">
+          <div class="vt-welcome-feature">
+            <i class="fas fa-bolt"></i>
+            <span>Cập nhật app mới liên tục, nhanh nhất</span>
+          </div>
+          <div class="vt-welcome-feature">
+            <i class="fas fa-shield-halved"></i>
+            <span>An toàn, không quảng cáo rác</span>
+          </div>
+          <div class="vt-welcome-feature">
+            <i class="fas fa-gift"></i>
+            <span>Hỗ trợ unlock ID miễn phí</span>
+          </div>
+        </div>
+        <button class="vt-welcome-btn" onclick="vtCloseWelcome()">
+          <i class="fas fa-arrow-right"></i> Khám phá ngay
+        </button>
+        <label class="vt-welcome-hide">
+          <input type="checkbox" id="vtHideForHour">
+          <span>Không hiện lại trong 1 giờ</span>
+        </label>
+      </div>
     </div>
-  </section>
 
-  <footer class="vthangios-footer">
-    &copy; Designer by Khuong Duy 2026
-  </footer>
-</main>
-
-<script>
+    <script>
+// 1. DỮ LIỆU GAME MOD
 const apps = [
   { 
     name: "FFARIS MỚI NHẤT OB55", 
@@ -232,100 +790,312 @@ const apps = [
     platform: "both", 
     bannerImg: "https://copium.pics/54vkwPcd.jpg", 
     iconImg: "https://copium.pics/cFMAru7F.jpg",
-    
     downloadLink: "https://link4m.net/HXMun", 
-    // ĐÂY LÀ CHỖ TRỎ SANG TRANG UNLOCK.HTML
     unlockIdLink: "unlock.html", 
-    dashLink: ""      
+    dashLink: "",
+    isNew: true
   },
+  {
+    name: "GTA 5 SAN MOD FULL XE ĐỘ MỚI NHẤT 2026",
+    date: "Bản mod GTA 5 dành riêng cho iOS",
+    platform: "ios",
+    bannerImg: "https://copium.pics/nYAXDqVQ.webp",
+    iconImg: "https://copium.pics/nYAXDqVQ.webp",
+    downloadLink: "https://link4m.net/xNTr4",
+    unlockIdLink: "",
+    dashLink: "",
+    isNew: true
+  }
 ];
 
+// 2. DỮ LIỆU ỨNG DỤNG
+// Thêm platform: "ios", "android", hoặc "both" cho từng ứng dụng
+const storeApps = [
+  // {
+  //   name: "Tên Ứng Dụng",
+  //   desc: "Mô tả ngắn",
+  //   platform: "both", // ios | android | both
+  //   icon: "link_anh",
+  //   link: "link_tai"
+  // }
+];
+
+// BIẾN LƯU TRẠNG THÁI TAB
+var currentPlatformFilter = 'ios'; 
+var currentStorePlatformFilter = 'ios';
+
+/* ============================================================ */
+/* XỬ LÝ TAB CHO GAME MOD                                        */
+/* ============================================================ */
+function vtFilterPlatform(platform) {
+  currentPlatformFilter = platform;
+  document.getElementById('tab-ios').classList.remove('active');
+  document.getElementById('tab-android').classList.remove('active');
+  document.getElementById('tab-' + platform).classList.add('active');
+  renderApps();
+}
+
+/* ============================================================ */
+/* RENDER GAME MOD                                               */
+/* ============================================================ */
 function renderApps() {
   const container = document.getElementById("app-list");
-  if (apps.length === 0) {
-    container.innerHTML += `<p style="text-align:center; color:#888; margin-top:20px;">Chưa có app nào được thêm...</p>`;
+  const filteredApps = apps.filter(function(app) {
+    return app.platform === currentPlatformFilter || app.platform === 'both';
+  });
+
+  if (filteredApps.length === 0) {
+    container.innerHTML = `<p style="text-align:center; color:#888; margin-top:20px; font-style:italic;">Chưa có Game Mod nào cho nền tảng này...</p>`;
     return;
   }
 
   let html = '';
-  apps.forEach(app => {
+  filteredApps.forEach(function(app) {
     let badge = '';
-    if (app.platform === 'ios') {
-      badge = `<span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>`;
-    } else if (app.platform === 'android') {
-      badge = `<span class="vthangios-platform-badge"><i class="bi bi-android2"></i> Android</span>`;
-    } else if (app.platform === 'both') {
-      badge = `
-        <span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>
-        <span class="vthangios-platform-badge"><i class="bi bi-android2"></i> Android</span>
-      `;
-    }
+    if (app.platform === 'ios') badge = `<span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span>`;
+    else if (app.platform === 'android') badge = `<span class="vthangios-platform-badge"><img src="https://copium.pics/t5hvRHHG.webp" class="vt-custom-icon" style="width:14px;height:14px;"> Android</span>`;
+    else if (app.platform === 'both') badge = `<span class="vthangios-platform-badge"><i class="fab fa-apple"></i> iOS</span><span class="vthangios-platform-badge"><img src="https://copium.pics/t5hvRHHG.webp" class="vt-custom-icon" style="width:14px;height:14px;"> Android</span>`;
 
-    let banner = app.bannerImg ? `<img src="${app.bannerImg}" alt="${app.name}">` : '';
-    let icon = app.iconImg ? `<img src="${app.iconImg}" alt="${app.name}">` : '';
+    let banner = app.bannerImg ? `<img src="${app.bannerImg}" alt="${app.name}" class="skeleton" onload="this.classList.remove('skeleton')">` : '';
+    let icon = app.iconImg ? `<img src="${app.iconImg}" alt="${app.name}" class="skeleton" onload="this.classList.remove('skeleton')">` : '';
+    let newBadge = app.isNew ? `<span class="badge-new">NEW</span>` : '';
 
     let actions = '';
+    if (app.downloadLink) actions += `<a href="${app.downloadLink}" target="_blank" class="vthangios-download-btn vthangios-app-cta" onclick="vtTrackDownload()"><i class="bi bi-download"></i> Download</a>`;
+    else actions += `<button onclick="vtToast('Đang cập nhật link Download!','info')" class="vthangios-download-btn vthangios-app-cta"><i class="bi bi-download"></i> Download</button>`;
     
-    if (app.downloadLink) {
-      actions += `<a href="${app.downloadLink}" target="_blank" class="vthangios-download-btn vthangios-app-cta"><i class="bi bi-download"></i> Download</a>`;
-    } else {
-      actions += `<button onclick="alert('Đang cập nhật link Download!')" class="vthangios-download-btn vthangios-app-cta"><i class="bi bi-download"></i> Download</button>`;
-    }
+    if (app.unlockIdLink) actions += `<a href="${app.unlockIdLink}" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</a>`;
+    else actions += `<button onclick="vtToast('Đang cập nhật link Unlock ID!','info')" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</button>`;
     
-    if (app.unlockIdLink) {
-      // TRỎ SANG TRANG UNLOCK.HTML
-      actions += `<a href="${app.unlockIdLink}" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</a>`;
-    } else {
-      actions += `<button onclick="alert('Đang cập nhật link Unlock ID!')" class="vthangios-app-getkey is-main"><i class="fa-solid fa-unlock-keyhole"></i> Unlock ID</button>`;
-    }
-
-    if (app.dashLink) {
-      actions += `<a href="${app.dashLink}" target="_blank" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</a>`;
-    } else {
-      actions += `<button onclick="alert('Đang cập nhật link FFARIS Dash!')" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</button>`;
-    }
+    if (app.dashLink) actions += `<a href="${app.dashLink}" target="_blank" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</a>`;
+    else actions += `<button onclick="vtToast('Đang cập nhật link FFARIS Dash!','info')" class="btn-dash"><i class="fa-solid fa-gauge-high"></i> FFARIS Dash</button>`;
 
     html += `
     <div class="vthangios-app-entry">
       <div class="vthangios-app-item">
         <div class="vthangios-app-banner">
-          ${banner}
-          <span class="vthangios-app-banner-badges">${badge}</span>
+          ${banner}${newBadge}<span class="vthangios-app-banner-badges">${badge}</span>
         </div>
         <div class="vthangios-app-info">
-          <div class="vthangios-app-icon-wrap">
-            ${icon}
-          </div>
+          <div class="vthangios-app-icon-wrap">${icon}</div>
           <div>
             <span class="vthangios-app-name">${app.name}</span>
             <span class="vthangios-app-desc">${app.date}</span>
           </div>
-          <div class="vthangios-app-actions">
-            ${actions}
-          </div>
+          <div class="vthangios-app-actions">${actions}</div>
         </div>
       </div>
-    </div>
-    `;
+    </div>`;
   });
-  container.innerHTML += html;
+  container.innerHTML = html;
 }
 
-renderApps();
+/* ============================================================ */
+/* XỬ LÝ TAB CHO KHO ỨNG DỤNG                                    */
+/* ============================================================ */
+function vtFilterStorePlatform(platform) {
+  currentStorePlatformFilter = platform;
+  document.getElementById('store-tab-ios').classList.remove('active');
+  document.getElementById('store-tab-android').classList.remove('active');
+  document.getElementById('store-tab-' + platform).classList.add('active');
+  renderStoreApps();
+}
 
+/* ============================================================ */
+/* RENDER KHO ỨNG DỤNG (DẠNG NGANG)                              */
+/* ============================================================ */
+function renderStoreApps() {
+  const container = document.getElementById("store-app-list");
+  
+  // Lọc ứng dụng theo nền tảng
+  const filteredStoreApps = storeApps.filter(function(app) {
+    return app.platform === currentStorePlatformFilter || app.platform === 'both';
+  });
+
+  if (filteredStoreApps.length === 0) {
+    container.innerHTML = `<p style="text-align:center; color:#888; margin:15px; font-style:italic;">Chưa có ứng dụng nào cho nền tảng này...</p>`;
+    return;
+  }
+
+  let html = '';
+  filteredStoreApps.forEach(function(app) {
+    html += `
+      <div class="vt-store-item">
+        <img src="${app.icon}" alt="${app.name}" class="vt-store-icon" onerror="this.src='https://via.placeholder.com/65?text=App'">
+        <div class="vt-store-info">
+          <div class="vt-store-name">${app.name}</div>
+          <div class="vt-store-desc">${app.desc}</div>
+        </div>
+        <a href="${app.link}" target="_blank" class="vt-store-btn">Nhận</a>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+/* ============================================================ */
+/* TOGGLE THEME                                                  */
+/* ============================================================ */
 function vtToggleTheme() {
   const body = document.body;
   const icon = document.getElementById('theme-icon');
   body.classList.toggle('vthangios-dark');
-  
   if (body.classList.contains('vthangios-dark')) {
     icon.className = 'bi bi-sun-fill';
     localStorage.setItem('vthangios_theme_v2', 'dark');
+    vtToast('Đã chuyển sang chế độ tối', 'info');
   } else {
     icon.className = 'bi bi-moon-fill';
     localStorage.setItem('vthangios_theme_v2', 'light');
+    vtToast('Đã chuyển sang chế độ sáng', 'info');
   }
 }
+
+/* ============================================================ */
+/* TOAST                                                         */
+/* ============================================================ */
+function vtToast(message, type) {
+  const container = document.getElementById('vtToastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'vt-toast';
+  const iconMap = { info: 'ℹ️', success: '✅', error: '❌', warn: '⚠️' };
+  toast.innerHTML = `<span>${iconMap[type] || 'ℹ️'}</span><span>${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(function() {
+    toast.style.animation = 'toastIn 0.3s ease reverse';
+    setTimeout(function(){ toast.remove(); }, 300);
+  }, 3000);
+}
+
+/* ============================================================ */
+/* PANEL THÔNG BÁO                                               */
+/* ============================================================ */
+function vtToggleNoti() {
+  document.getElementById('vtNotiPanel').classList.toggle('open');
+}
+
+/* ============================================================ */
+/* ĐẾM LƯỢT TẢI - BẮT ĐẦU TỪ 852                                */
+/* ============================================================ */
+var VT_DOWNLOAD_BASE = 852;
+
+function vtTrackDownload() {
+  let count = parseInt(localStorage.getItem('vt_download_count') || '0', 10);
+  count += 1;
+  localStorage.setItem('vt_download_count', count);
+  document.getElementById('statDownloads').textContent = VT_DOWNLOAD_BASE + count;
+  vtToast('Đang chuyển đến link tải...', 'success');
+}
+
+/* ============================================================ */
+/* RIPPLE EFFECT                                                 */
+/* ============================================================ */
+document.addEventListener('click', function(e) {
+  const target = e.target.closest('button, a.vthangios-app-cta, a.btn-dash, a.vt-store-btn');
+  if (!target) return;
+  const rect = target.getBoundingClientRect();
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+  ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+  target.appendChild(ripple);
+  setTimeout(function(){ ripple.remove(); }, 600);
+});
+
+/* ============================================================ */
+/* PROGRESS BAR + BACK TO TOP                                    */
+/* ============================================================ */
+window.addEventListener('scroll', function() {
+  const scrollTop = document.documentElement.scrollTop;
+  const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('vtProgressBar').style.width = percent + '%';
+  document.getElementById('vtBackTop').style.display = scrollTop > 300 ? 'block' : 'none';
+});
+
+/* ============================================================ */
+/* BẢNG THÔNG BÁO CHÀO MỪNG                                      */
+/* ============================================================ */
+var VT_WELCOME_KEY = 'vt_welcome_hidden_until';
+
+function vtShowWelcomeIfAllowed() {
+  var hiddenUntil = parseInt(localStorage.getItem(VT_WELCOME_KEY) || '0', 10);
+  var now = Date.now();
+  if (now >= hiddenUntil) {
+    document.getElementById('vtWelcomeOverlay').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function vtCloseWelcome() {
+  var checkbox = document.getElementById('vtHideForHour');
+  if (checkbox && checkbox.checked) {
+    var hideUntil = Date.now() + 3600000;
+    localStorage.setItem(VT_WELCOME_KEY, hideUntil.toString());
+  }
+  var overlay = document.getElementById('vtWelcomeOverlay');
+  overlay.style.opacity = '0';
+  overlay.style.transition = 'opacity 0.3s ease';
+  setTimeout(function() {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 300);
+}
+
+/* ============================================================ */
+/* HIỆU ỨNG ĐÁNH MÁY CHO CHỮ "Hi, i am"                          */
+/* ============================================================ */
+function vtTypeEffect() {
+  const el = document.querySelector('.vthangios-iam');
+  if (!el) return;
+  const text = "Hi, i am";
+  el.textContent = '';
+  el.classList.add('vt-typing');
+  let i = 0;
+  function type() {
+    if (i < text.length) {
+      el.textContent += text.charAt(i);
+      i++;
+      setTimeout(type, 100);
+    } else {
+      setTimeout(() => el.classList.remove('vt-typing'), 2000); 
+    }
+  }
+  type();
+}
+
+/* ============================================================ */
+/* KHỞI TẠO                                                      */
+/* ============================================================ */
+document.addEventListener('DOMContentLoaded', function() {
+  // Render Game Mod
+  renderApps();       
+  
+  // Render Ứng Dụng (Danh sách ngang)
+  renderStoreApps();  
+  
+  const savedCount = parseInt(localStorage.getItem('vt_download_count') || '0', 10);
+  document.getElementById('statDownloads').textContent = VT_DOWNLOAD_BASE + savedCount;
+  
+  // Đồng bộ icon theme
+  const icon = document.getElementById('theme-icon');
+  if (icon) {
+    icon.className = document.body.classList.contains('vthangios-dark')
+      ? 'bi bi-sun-fill'
+      : 'bi bi-moon-fill';
+  }
+
+  // Hiệu ứng đánh máy
+  vtTypeEffect();
+  
+  // Hiện thông báo chào mừng sau 500ms
+  setTimeout(function() {
+    vtShowWelcomeIfAllowed();
+    vtToast('Chào mừng đến với Khuong Duy!', 'success');
+  }, 500);
+});
 </script>
-</body>
+  </body>
 </html>
